@@ -10,7 +10,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
+	
+	<ItemGroup>
+		<AdditionalFiles Include="$(SolutionDir)_stylecop\stylecop.json" Link="_stylecop\stylecop.json"/>
+	</ItemGroup>
+	
   <ItemGroup>
     <ProjectReference Include="..\Staff.Extentions\Staff.Extentions.csproj" />
   </ItemGroup>
