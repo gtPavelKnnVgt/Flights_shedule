@@ -6,23 +6,25 @@ namespace Domain
     using System;
     using System.Collections.Generic;
     using Staff.Extentions;
+
     /// <summary>
-    /// Самолёт
+    /// Самолёт.
     /// </summary>
     public class Airplane
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="Airplane"/> class.
         /// Инициализирует новый экземпляр класса <see cref="Airplane"/>.
         /// </summary>
-        /// <param name="id">Уникальный идентификатор</param>
-        /// <param name="type">Тип самолёта</param>
-        /// <param name="size">Размер самолёта</param>
-        /// <param name="tailNumber">Бортовой номер</param>
-        /// <param name="totalWeight">Общая масса самолёта</param>
-        /// <param name="airplaneClass">Класс самолёта</param>
-        /// <param name="seatsCount">Количество мест</param>
-        /// <param name="flightRange">Дальность полёта</param>
-        /// <param name="flights">Рейсы, на которых летает данный самолёт</param>
+        /// <param name="id">Уникальный идентификатор.</param>
+        /// <param name="type">Тип самолёта.</param>
+        /// <param name="size">Размер самолёта.</param>
+        /// <param name="tailNumber">Бортовой номер.</param>
+        /// <param name="totalWeight">Общая масса самолёта.</param>
+        /// <param name="airplaneClass">Класс самолёта.</param>
+        /// <param name="seatsCount">Количество мест.</param>
+        /// <param name="flightRange">Дальность полёта.</param>
+        /// <param name="flights">Рейсы, на которых летает данный самолёт.</param>
         public Airplane(int id, string type, double size, string tailNumber, double totalWeight, char airplaneClass, int seatsCount, double flightRange, ISet<Flight> flights = null)
         {
             this.Id = id;
@@ -50,40 +52,49 @@ namespace Domain
                 }
             }
         }
+
         /// <summary>
-        /// Уникальный индентификатор
+        /// Gets or sets уникальный индентификатор.
         /// </summary>
         public int Id { get; protected set; }
+
         /// <summary>
-        /// Тип самолёта
+        /// Gets or sets тип самолёта.
         /// </summary>
         public string Type { get; protected set; }
+
         /// <summary>
-        /// Размер самолёта
+        /// Gets or sets размер самолёта.
         /// </summary>
         public double Size { get; protected set; }
+
         /// <summary>
-        /// Бортовой номер
+        /// Gets or sets бортовой номер.
         /// </summary>
         public string TailNumber { get; protected set; }
+
         /// <summary>
-        /// Общая масса
+        /// Gets or sets общая масса.
         /// </summary>
         public double TotalWeight { get; protected set; }
+
         /// <summary>
-        /// Список классов самолёта
+        /// Gets or sets список классов самолёта.
         /// </summary>
         public char AirplaneClass { get; protected set; }
+
         /// <summary>
-        /// Количество мест в самолёте
+        /// Gets or sets количество мест в самолёте.
         /// </summary>
         public int SeatsCount { get; protected set; }
+
         /// <summary>
-        /// Дальность полёта
+        /// Gets or sets дальность полёта.
         /// </summary>
         public double FlightRange { get; protected set; }
+
         /// <summary>
-        /// Коллекция рейсов
+        /// Gets or sets коллекция рейсов.
         /// </summary>
         public ISet<Flight> Flights { get; protected set; } = new HashSet<Flight>();
     }
