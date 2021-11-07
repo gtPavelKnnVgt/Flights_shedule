@@ -22,17 +22,17 @@ namespace Domain.Tests
 
             // assert
 
-            Assert.AreEqual("О'Брайен У.", result);
+            Assert.AreEqual("Рћ'Р‘СЂР°Р№РµРЅ РЈ.", result);
         }
         [Test]
         public void Ctor_WrongData_EmptyFirstName_Fail()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GeneratePassenger("О'Брайен",string.Empty));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GeneratePassenger("Рћ'Р‘СЂР°Р№РµРЅ",string.Empty));
         }
         [Test]
         public void Ctor_WrongData_EmptySecondName_Fail()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GeneratePassenger(string.Empty, "Уолтер"));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GeneratePassenger(string.Empty, "РЈРѕР»С‚РµСЂ"));
         }
         [Test]
         public void AddFlightToPassenger_ValidData_Success()
@@ -56,13 +56,13 @@ namespace Domain.Tests
         }
         private static Passenger GeneratePassenger(string secondName = null,string firstName=null)
         {
-            return new Passenger(1, secondName ?? "О'Брайен", firstName ?? "Уолтер");
+            return new Passenger(1, secondName ?? "Рћ'Р‘СЂР°Р№РµРЅ", firstName ?? "РЈРѕР»С‚РµСЂ");
         }
         private static Flight GenerateFlight(int flightNumber=1, int ticketPrice=1000, string direction=null,
             string departureTime=null, string arrivalTime=null)
         {
             return new(flightNumber, ticketPrice, 
-                direction ?? "Москва - Минск",
+                direction ?? "РњРѕСЃРєРІР° - РњРёРЅСЃРє",
                 departureTime ?? "12:30",
                 arrivalTime ?? "15:00");
         }
