@@ -45,20 +45,6 @@ namespace Domain.Tests
             Assert.DoesNotThrow(() => _ = GenerateAirplane("MIL", 550.50, "PRE3000"));
         }
 
-        private static Passenger GeneratePassenger(string secondName = null, string firstName = null)
-        {
-            return new Passenger(1, secondName ?? "О'Брайен", firstName ?? "Уолтер");
-        }
-
-        private static Flight GenerateFlight(int flightNumber = 1, int ticketPrice = 1000, string direction = null,
-            string departureTime = null, string arrivalTime = null)
-        {
-            return new (flightNumber, ticketPrice,
-                direction ?? "Москва - Минск",
-                departureTime ?? "12:30",
-                arrivalTime ?? "15:00");
-        }
-
         private static Airplane GenerateAirplane(string type = null, double size = 350.29, string tailNumber = null, double totalWeight = 145.2,
            char airplaneClass = 'A', int seatsCount = 286, double flightRange = 10000.252)
         {
