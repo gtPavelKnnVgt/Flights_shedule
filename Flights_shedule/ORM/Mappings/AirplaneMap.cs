@@ -24,6 +24,8 @@
             this.Map(x => x.AirplaneClass);
             this.Map(x => x.SeatsCount);
             this.Map(x => x.FlightRange);
+
+            this.HasMany(x => x.Flights).Inverse();
         }
     }
 }

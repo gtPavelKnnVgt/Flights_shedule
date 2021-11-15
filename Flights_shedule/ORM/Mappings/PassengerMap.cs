@@ -20,6 +20,8 @@
             this.Map(x => x.LastName);
             this.Map(x => x.FirstName);
             this.Map(x => x.Passport);
+
+            this.References(x => x.Flight);
         }
     }
 }

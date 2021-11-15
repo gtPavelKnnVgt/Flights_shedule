@@ -21,6 +21,10 @@
             this.Map(x => x.ArrivalTime);
             this.Map(x => x.TicketPrice);
             this.Map(x => x.Direction);
+
+            this.References(x => x.Airplane);
+
+            this.HasMany(x => x.Passengers).Inverse();
         }
     }
 }
