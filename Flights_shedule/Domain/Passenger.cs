@@ -53,20 +53,8 @@ namespace Domain
         /// </summary>
         public int Passport { get; protected set; }
 
-        /// <summary>
-        /// Gets or sets коллекция рейсов.
-        /// </summary>
-        public ISet<Flight> Flights { get; protected set; } = new HashSet<Flight>();
-
-        /// <summary>
-        /// Добавление рейса пассажиру.
-        /// </summary>
-        /// <param name="flight">Добавляемый рейс.</param>
-        /// <returns>
-        /// <see langword="true"/> если рейс был добавлен.
-        /// </returns>
-        public bool AddFlight(Flight flight)
-            => this.Flights.TryAdd(flight) ?? throw new ArgumentNullException(nameof(flight));
+        public int FlightId { get; protected set; }
+        public Flight Flight { get; protected set; }
 
         /// <inheritdoc/>
         public override string ToString() => this.FullName;

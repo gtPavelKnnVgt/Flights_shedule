@@ -48,7 +48,6 @@ namespace Domain
                 foreach (var flight in flights)
                 {
                     this.Flights.Add(flight);
-                    flight.AddAirplane(this);
                 }
             }
         }

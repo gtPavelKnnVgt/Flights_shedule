@@ -54,7 +54,6 @@ namespace Domain
                 foreach (var passenger in passengers)
                 {
                     this.Passengers.Add(passenger);
-                    passenger.AddFlight(this);
                 }
             }
         }
@@ -92,17 +91,8 @@ namespace Domain
         /// <summary>
         /// Gets or sets коллекция самолётов.
         /// </summary>
-        public ISet<Airplane> Airplanes { get; protected set; } = new HashSet<Airplane>();
-
-        /// <summary>
-        /// Добавление самолёта рейсу.
-        /// </summary>
-        /// <param name="airplane">Добавленный самолёт.</param>
-        /// <returns>
-        /// <see langword="true"/> если самолёт был добавлен.
-        /// </returns>
-        public bool AddAirplane(Airplane airplane) =>
-            this.Airplanes.TryAdd(airplane) ?? throw new ArgumentNullException(nameof(airplane));
+        public int AirPlaneId { get; protected set; }
+        public Airplane Airplane{ get; protected set; }
 
         /// <inheritdoc/>
         public override string ToString()
