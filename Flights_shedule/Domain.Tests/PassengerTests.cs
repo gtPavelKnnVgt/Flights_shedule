@@ -35,20 +35,6 @@ namespace Domain.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => _ = GeneratePassenger(string.Empty, "Уолтер"));
         }
         [Test]
-        public void AddFlightToPassenger_ValidData_Success()
-        {
-            // arrange
-            var passenger = GeneratePassenger();
-            var flight = GenerateFlight();
-
-            // act
-            var addedPassenger = passenger.AddFlight(flight);
-
-            // assert
-            Assert.AreEqual(true, addedPassenger);
-
-        }
-        [Test]
         public void Ctor_ValidData_EmptyPassenger_Success()
         {
             // arrange & act & assert
