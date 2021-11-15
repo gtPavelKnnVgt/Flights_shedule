@@ -48,7 +48,6 @@ namespace Domain
                 foreach (var flight in flights)
                 {
                     this.Flights.Add(flight);
-                    flight.AddAirplane(this);
                 }
             }
         }
@@ -57,6 +56,11 @@ namespace Domain
         /// Gets or sets уникальный индентификатор.
         /// </summary>
         public int Id { get; protected set; }
+
+        /// <summary>
+        /// Gets Общая информация.
+        /// </summary>
+        public string CommonInfo => $"{this.Type}, {this.TailNumber}, {this.SeatsCount} ".Trim();
 
         /// <summary>
         /// Gets or sets тип самолёта.
@@ -97,5 +101,6 @@ namespace Domain
         /// Gets or sets коллекция рейсов.
         /// </summary>
         public ISet<Flight> Flights { get; protected set; } = new HashSet<Flight>();
+        public override string ToString() => this.CommonInfo;
     }
 }

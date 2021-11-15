@@ -27,7 +27,7 @@ namespace Domain.Tests
         [Test]
         public void Ctor_WrongData_EmptyFirstName_Fail()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GeneratePassenger("О'Брайен",string.Empty));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GeneratePassenger("О'Брайен", string.Empty));
         }
         [Test]
         public void Ctor_WrongData_EmptySecondName_Fail()
@@ -58,10 +58,10 @@ namespace Domain.Tests
         {
             return new Passenger(1, secondName ?? "О'Брайен", firstName ?? "Уолтер");
         }
-        private static Flight GenerateFlight(int flightNumber=1, int ticketPrice=1000, string direction=null,
-            string departureTime=null, string arrivalTime=null)
+        private static Flight GenerateFlight(int flightNumber = 1, int ticketPrice = 1000, string direction = null,
+            string departureTime = null, string arrivalTime=null)
         {
-            return new(flightNumber, ticketPrice, 
+            return new (flightNumber, ticketPrice, 
                 direction ?? "Москва - Минск",
                 departureTime ?? "12:30",
                 arrivalTime ?? "15:00");
