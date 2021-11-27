@@ -46,10 +46,31 @@ namespace Domain.Tests
         }
 
         [Test]
-        public void Ctor_ValidData_EmptyFlight_Success()
+        public void Ctor_WrongData_FlightNumberIsNegative_Fail()
         {
-            // arrange & act & assert
-            Assert.DoesNotThrow(() => _ = GenerateAirplane("Military"));
+            var passenger = GeneratePassenger();
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, -1, 1000, string.Empty, "12:30", "15:00"));
+        }
+
+        [Test]
+        public void Ctor_WrongData_FlightNumberIsNull_Fail()
+        {
+            var passenger = GeneratePassenger();
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, 0, 1000, string.Empty, "12:30", "15:00"));
+        }
+
+        [Test]
+        public void Ctor_WrongData_TicketPriceisNegative_Fail()
+        {
+            var passenger = GeneratePassenger();
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, 1, -1000, string.Empty, "12:30", "15:00"));
+        }
+
+        [Test]
+        public void Ctor_WrongData_TicketPriceIsNull_Fail()
+        {
+            var passenger = GeneratePassenger();
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, 1, 0, string.Empty, "12:30", "15:00"));
         }
 
         private static Flight GenerateFlight(Passenger passenger, int flightNumber = 197, int ticketPrice = 1000, string direction = null,

@@ -32,17 +32,17 @@ namespace Domain
 
             this.Type = type.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(type));
 
-            this.Size = size;
+            this.Size = size.NullOrNegative() ?? throw new ArgumentOutOfRangeException(nameof(size));
 
             this.TailNumber = tailNumber.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(tailNumber));
 
-            this.TotalWeight = totalWeight;
+            this.TotalWeight = totalWeight.NullOrNegative()?.WeightCheck() ?? throw new ArgumentOutOfRangeException(nameof(totalWeight));
 
             this.AirplaneClass = airplaneClass;
 
-            this.SeatsCount = seatsCount;
+            this.SeatsCount = seatsCount.NullOrNegative()?.SeatRange() ?? throw new ArgumentOutOfRangeException(nameof(seatsCount));
 
-            this.FlightRange = flightRange;
+            this.FlightRange = flightRange.NullOrNegative()?.FlightRangeCheck() ?? throw new ArgumentOutOfRangeException(nameof(flightRange));
 
             if (flights != null)
             {
@@ -61,7 +61,7 @@ namespace Domain
         /// <summary>
         /// Общая информация.
         /// </summary>
-        public string CommonInfo => $"{this.Type}, {this.TailNumber}, {this.SeatsCount} ".Trim();
+        public string CommonInfo => $"{this.Type}, {this.TailNumber}, {this.SeatsCount}, {this.TotalWeight} ".Trim();
 
         /// <summary>
         /// Тип самолёта.

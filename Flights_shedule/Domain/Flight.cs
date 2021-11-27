@@ -41,9 +41,9 @@ namespace Domain
         /// <param name="passengers">Пассажиры рейса.</param>
         public Flight(int flightNumber, int ticketPrice, string direction, string departureTime, string arrivalTime, ISet<Passenger> passengers = null)
         {
-            this.FlightNumber = flightNumber;
+            this.FlightNumber = flightNumber.NullOrNegative() ?? throw new ArgumentOutOfRangeException(nameof(flightNumber));
 
-            this.TicketPrice = ticketPrice;
+            this.TicketPrice = ticketPrice.NullOrNegative() ?? throw new ArgumentOutOfRangeException(nameof(ticketPrice));
 
             this.Direction = direction.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(direction));
 

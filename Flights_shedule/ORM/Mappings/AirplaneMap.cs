@@ -28,7 +28,7 @@ namespace ORM.Mappings
             this.Map(x => x.SeatsCount);
             this.Map(x => x.FlightRange);
 
-            this.HasMany(x => x.Flights).Inverse();
+            this.HasMany(x => x.Flights).Not.Inverse();
         }
     }
 }
