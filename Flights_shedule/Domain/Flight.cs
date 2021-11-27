@@ -23,7 +23,7 @@ namespace Domain
         /// <param name="departureTime">Время отправления.</param>
         /// <param name="arrivalTime">Время прибытия.</param>
         /// <param name="passengers">Пассажиры рейса.</param>
-        public Flight(int flightNumber, int ticketPrice, string direction, string departureTime, string arrivalTime, params Passenger[] passengers)
+        public Flight(int flightNumber, int ticketPrice, Direction direction, string departureTime, string arrivalTime, params Passenger[] passengers)
             : this(flightNumber, ticketPrice, direction, departureTime, arrivalTime, new HashSet<Passenger>(passengers))
         {
         }
@@ -39,13 +39,13 @@ namespace Domain
         /// <param name="departureTime">Время отправления.</param>
         /// <param name="arrivalTime">Время прибытия.</param>
         /// <param name="passengers">Пассажиры рейса.</param>
-        public Flight(int flightNumber, int ticketPrice, string direction, string departureTime, string arrivalTime, ISet<Passenger> passengers = null)
+        public Flight(int flightNumber, int ticketPrice, Direction direction, string departureTime, string arrivalTime, ISet<Passenger> passengers = null)
         {
             this.FlightNumber = flightNumber.NullOrNegative() ?? throw new ArgumentOutOfRangeException(nameof(flightNumber));
 
             this.TicketPrice = ticketPrice.NullOrNegative() ?? throw new ArgumentOutOfRangeException(nameof(ticketPrice));
 
-            this.Direction = direction.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(direction));
+            this.Direction = direction;
 
             this.DepartureTime = departureTime.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(departureTime));
 
@@ -78,7 +78,7 @@ namespace Domain
         /// <summary>
         /// Направление.
         /// </summary>
-        public string Direction { get; protected set; }
+        public Direction Direction { get; protected set; }
 
         /// <summary>
         /// Время вылета.

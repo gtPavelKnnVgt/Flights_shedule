@@ -8,13 +8,52 @@ namespace Domain
     using Staff.Extentions;
 
     /// <summary>
+    /// Перечисление классификаторов самолёта
+    /// </summary>
+    public enum AirplaneClasses
+    {
+        /// <summary>
+        /// Класс А. Размах крыла < 15 м.
+        /// </summary>
+        A = 'A',
+
+        /// <summary>
+        /// Класс B. Размах крыла = 15-24 м.
+        /// </summary>
+        B = 'B',
+
+        /// <summary>
+        /// Класс C. Размах крыла = 24-36 м.
+        /// </summary>
+        C = 'C',
+
+        /// <summary>
+        /// Класс D. Размах крыла = 36-52 м.
+        /// </summary>
+        D = 'D',
+
+        /// <summary>
+        /// Класс E. Размах крыла = 52-65 м.
+        /// </summary>
+        E = 'E',
+
+        /// <summary>
+        /// Класс F. Размах крыла = 65-80 м.
+        /// </summary>
+        F = 'F',
+    }
+
+    /// <summary>
     /// Самолёт.
     /// </summary>
     public class Airplane
     {
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="Airplane"/>.
-        /// Initializes a new instance of the <see cref="Airplane"/> class.
+        /// Классификатор самолёта.
+        /// </summary> 
+        private readonly AirplaneClasses airplaneClass;
+
+        /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Airplane"/>.
         /// </summary>
         /// <param name="id">Уникальный идентификатор.</param>
@@ -22,11 +61,11 @@ namespace Domain
         /// <param name="size">Размер самолёта.</param>
         /// <param name="tailNumber">Бортовой номер.</param>
         /// <param name="totalWeight">Общая масса самолёта.</param>
-        /// <param name="airplaneClass">Класс самолёта.</param>
+        /// <param name="airplaneClass">Классификатор самолёта.</param>
         /// <param name="seatsCount">Количество мест.</param>
         /// <param name="flightRange">Дальность полёта.</param>
         /// <param name="flights">Рейсы, на которых летает данный самолёт.</param>
-        public Airplane(int id, string type, double size, string tailNumber, double totalWeight, char airplaneClass, int seatsCount, double flightRange, ISet<Flight> flights = null)
+        public Airplane(int id, string type, double size, string tailNumber, double totalWeight, AirplaneClasses airplaneClass, int seatsCount, double flightRange, ISet<Flight> flights = null)
         {
             this.Id = id;
 
@@ -38,7 +77,7 @@ namespace Domain
 
             this.TotalWeight = totalWeight.NullOrNegative()?.WeightCheck() ?? throw new ArgumentOutOfRangeException(nameof(totalWeight));
 
-            this.AirplaneClass = airplaneClass;
+            this.airplaneClass = airplaneClass;
 
             this.SeatsCount = seatsCount.NullOrNegative()?.SeatRange() ?? throw new ArgumentOutOfRangeException(nameof(seatsCount));
 
@@ -52,7 +91,6 @@ namespace Domain
                 }
             }
         }
-
         /// <summary>
         /// Уникальный индентификатор.
         /// </summary>
@@ -82,11 +120,6 @@ namespace Domain
         /// Общая масса.
         /// </summary>
         public double TotalWeight { get; protected set; }
-
-        /// <summary>
-        /// Список классов самолёта.
-        /// </summary>
-        public char AirplaneClass { get; protected set; }
 
         /// <summary>
         /// Количество мест в самолёте.
