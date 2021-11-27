@@ -1,6 +1,5 @@
 ﻿namespace Staff.Extentions
 {
-    using System;
     using System.Collections.Generic;
     public static class IEnumerableExtentions
     {

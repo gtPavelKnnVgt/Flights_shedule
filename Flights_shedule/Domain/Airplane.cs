@@ -1,5 +1,5 @@
 ﻿// <copyright file="Airplane.cs" company="МИИТ">
-// Copyright (c) Дюсов М.А All rights reserved.
+// Copyright (c) Дюсов М. А. All rights reserved.
 // </copyright>
 namespace Domain
 {
@@ -13,6 +13,7 @@ namespace Domain
     public class Airplane
     {
         /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Airplane"/>.
         /// Initializes a new instance of the <see cref="Airplane"/> class.
         /// Инициализирует новый экземпляр класса <see cref="Airplane"/>.
         /// </summary>
@@ -53,54 +54,56 @@ namespace Domain
         }
 
         /// <summary>
-        /// Gets or sets уникальный индентификатор.
+        /// Уникальный индентификатор.
         /// </summary>
         public int Id { get; protected set; }
 
         /// <summary>
-        /// Gets Общая информация.
+        /// Общая информация.
         /// </summary>
         public string CommonInfo => $"{this.Type}, {this.TailNumber}, {this.SeatsCount} ".Trim();
 
         /// <summary>
-        /// Gets or sets тип самолёта.
+        /// Тип самолёта.
         /// </summary>
         public string Type { get; protected set; }
 
         /// <summary>
-        /// Gets or sets размер самолёта.
+        /// Размер самолёта.
         /// </summary>
         public double Size { get; protected set; }
 
         /// <summary>
-        /// Gets or sets бортовой номер.
+        /// Бортовой номер.
         /// </summary>
         public string TailNumber { get; protected set; }
 
         /// <summary>
-        /// Gets or sets общая масса.
+        /// Общая масса.
         /// </summary>
         public double TotalWeight { get; protected set; }
 
         /// <summary>
-        /// Gets or sets список классов самолёта.
+        /// Список классов самолёта.
         /// </summary>
         public char AirplaneClass { get; protected set; }
 
         /// <summary>
-        /// Gets or sets количество мест в самолёте.
+        /// Количество мест в самолёте.
         /// </summary>
         public int SeatsCount { get; protected set; }
 
         /// <summary>
-        /// Gets or sets дальность полёта.
+        /// Дальность полёта.
         /// </summary>
         public double FlightRange { get; protected set; }
 
         /// <summary>
-        /// Gets or sets коллекция рейсов.
+        /// Коллекция рейсов.
         /// </summary>
         public ISet<Flight> Flights { get; protected set; } = new HashSet<Flight>();
+
+        /// <inheritdoc/>
         public override string ToString() => this.CommonInfo;
     }
 }

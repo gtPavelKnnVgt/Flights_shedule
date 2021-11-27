@@ -1,10 +1,9 @@
 ﻿// <copyright file="Passenger.cs" company="МИИТ">
-// Copyright (c) Дюсов М.А All rights reserved.
+// Copyright (c) МИИТ. All rights reserved.
 // </copyright>
 namespace Domain
 {
     using System;
-    using System.Collections.Generic;
     using Staff.Extentions;
 
     /// <summary>
@@ -13,8 +12,8 @@ namespace Domain
     public class Passenger
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Passenger"/> class.
         /// Инициализирует новый экземпляр класса <see cref="Passenger"/>.
+        /// Initializes a new instance of the <see cref="Passenger"/> class.
         /// </summary>
         /// <param name="id">Уникальный идентификатор.</param>
         /// <param name="lastName">Фамилия.</param>
@@ -29,31 +28,38 @@ namespace Domain
         }
 
         /// <summary>
-        /// Gets or sets уникальный идентификатор.
+        /// Идентификационный номер пассажира.
         /// </summary>
         public int Id { get; protected set; }
 
         /// <summary>
-        /// Gets or sets фамилия.
+        /// Фамилия.
         /// </summary>
         public string LastName { get; protected set; }
 
         /// <summary>
-        /// Gets or sets имя.
+        /// Имя.
         /// </summary>
         public string FirstName { get; protected set; }
 
         /// <summary>
-        /// Gets полное имя.
+        /// Полное имя.
         /// </summary>
         public string FullName => $"{this.LastName} {this.FirstName[0]}. ".Trim();
 
         /// <summary>
-        /// Gets or sets номер паспорта.
+        /// Номер паспорта.
         /// </summary>
         public int Passport { get; protected set; }
 
+        /// <summary>
+        /// Идентификационный номер рейса.
+        /// </summary>
         public int FlightId { get; protected set; }
+
+        /// <summary>
+        /// Рейс.
+        /// </summary>
         public Flight Flight { get; protected set; }
 
         /// <inheritdoc/>

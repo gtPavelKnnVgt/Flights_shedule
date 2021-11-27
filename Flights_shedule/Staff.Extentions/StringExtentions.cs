@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Staff.Extentions
+﻿namespace Staff.Extentions
 {
     public static class StringExtentions
     {

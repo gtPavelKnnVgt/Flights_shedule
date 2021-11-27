@@ -13,6 +13,7 @@ namespace Domain
     public class Flight
     {
         /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Flight"/>.
         /// Initializes a new instance of the <see cref="Flight"/> class.
         /// Инициализирует новый экземпляр класса <see cref="Flight"/>.
         /// </summary>
@@ -28,6 +29,7 @@ namespace Domain
         }
 
         /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Flight"/>.
         /// Initializes a new instance of the <see cref="Flight"/> class.
         /// Инициализирует новый экземпляр класса <see cref="Flight"/>.
         /// </summary>
@@ -59,40 +61,44 @@ namespace Domain
         }
 
         /// <summary>
-        /// Gets or sets номер рейса (уникальный идентификатор).
+        /// Номер рейса (уникальный идентификатор).
         /// </summary>
         public int FlightNumber { get; protected set; }
 
         /// <summary>
-        /// Gets or sets список пассажиров.
+        /// Список пассажиров.
         /// </summary>
         public ISet<Passenger> Passengers { get; protected set; } = new HashSet<Passenger>();
 
         /// <summary>
-        /// Gets or sets стоимость билета.
+        /// Стоимость билета.
         /// </summary>
         public int TicketPrice { get; protected set; }
 
         /// <summary>
-        /// Gets or sets направление.
+        /// Направление.
         /// </summary>
         public string Direction { get; protected set; }
 
         /// <summary>
-        /// Gets or sets время вылета.
+        /// Время вылета.
         /// </summary>
         public string DepartureTime { get; protected set; }
 
         /// <summary>
-        /// Gets or sets время прилёта.
+        /// Время прилёта.
         /// </summary>
         public string ArrivalTime { get; protected set; }
 
         /// <summary>
-        /// Gets or sets коллекция самолётов.
+        /// Идентификационный номер самолёта.
         /// </summary>
         public int AirPlaneId { get; protected set; }
-        public Airplane Airplane{ get; protected set; }
+
+        /// <summary>
+        /// Самолёт.
+        /// </summary>
+        public Airplane Airplane { get; protected set; }
 
         /// <inheritdoc/>
         public override string ToString()

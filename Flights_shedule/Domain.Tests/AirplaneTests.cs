@@ -1,12 +1,9 @@
-﻿
-
+﻿// <copyright file="AirplaneTests.cs" company="МИИТ">
+// Copyright (c) Кононов П. А. All rights reserved.
+// </copyright>
 namespace Domain.Tests
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using NUnit.Framework;
 
     [TestFixture]
@@ -22,7 +19,6 @@ namespace Domain.Tests
             var result = airplane.ToString();
 
             // assert
-
             Assert.AreEqual("Common, AA44, 286", result);
         }
 
