@@ -45,7 +45,7 @@ namespace Domain
 
             this.TicketPrice = ticketPrice.NullOrNegative() ?? throw new ArgumentOutOfRangeException(nameof(ticketPrice));
 
-            this.Direction = direction;
+            this.Direction = direction ?? throw new ArgumentOutOfRangeException(nameof(direction));
 
             this.DepartureTime = departureTime.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(departureTime));
 

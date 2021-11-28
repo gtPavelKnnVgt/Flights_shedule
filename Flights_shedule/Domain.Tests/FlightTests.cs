@@ -28,66 +28,65 @@ namespace Domain.Tests
         public void Ctor_WrongData_EmptyDirection_Fail()
         {
             var passenger = GeneratePassenger();
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, 1, 1000, string.Empty, "12:30", "15:00"));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = new Flight(1, 1000, null, "12:30", "15:00"));
         }
 
         [Test]
         public void Ctor_WrongData_EmptyDepartureTime_Fail()
         {
             var passenger = GeneratePassenger();
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, 1, 1000, "Москва - Минск", string.Empty, "15:00"));
+            var direction = GenerateDirection();
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, 1, 1000, direction, string.Empty, "15:00"));
         }
 
         [Test]
         public void Ctor_WrongData_EmptyArrivalTime_Fail()
         {
             var passenger = GeneratePassenger();
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, 1, 1000, "Москва - Минск", "12:30", string.Empty));
+            var direction = GenerateDirection();
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, 1, 1000, direction, "12:30", string.Empty));
         }
 
         [Test]
         public void Ctor_WrongData_FlightNumberIsNegative_Fail()
         {
             var passenger = GeneratePassenger();
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, -1, 1000, string.Empty, "12:30", "15:00"));
+            var direction = GenerateDirection();
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, -1, 1000, direction, "12:30", "15:00"));
         }
 
         [Test]
         public void Ctor_WrongData_FlightNumberIsNull_Fail()
         {
             var passenger = GeneratePassenger();
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, 0, 1000, string.Empty, "12:30", "15:00"));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = new Flight(0, 1000, null, "12:30", "15:00"));
         }
 
         [Test]
         public void Ctor_WrongData_TicketPriceisNegative_Fail()
         {
             var passenger = GeneratePassenger();
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, 1, -1000, string.Empty, "12:30", "15:00"));
+            var direction = GenerateDirection();
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, 1, -1000, direction, "12:30", "15:00"));
         }
 
         [Test]
         public void Ctor_WrongData_TicketPriceIsNull_Fail()
         {
             var passenger = GeneratePassenger();
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, 1, 0, string.Empty, "12:30", "15:00"));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = new Flight(0, 0, null, "12:30", "15:00")); ;
         }
 
-        private static Flight GenerateFlight(Passenger passenger, int flightNumber = 197, int ticketPrice = 1000, string direction = null,
-           string departureTime = null, string arrivalTime = null)
+        private static Flight GenerateFlight(Passenger passenger, int flightNumber = 197, int ticketPrice = 1000, Direction direction = null, string departureTime = null, string arrivalTime = null)
         {
-            return new Flight(flightNumber, ticketPrice,
-               direction ?? "Москва - Минск",
+            return new (flightNumber, ticketPrice,
+               direction ?? new ("Москва", "Рязань"),
                departureTime ?? "12:30",
                arrivalTime ?? "15:00", passenger);
         }
 
-        private static Passenger GeneratePassenger(string secondName = null, string firstName = null) => new Passenger(1, secondName ?? "О'Брайен", firstName ?? "Уолтер");
+        private static Passenger GeneratePassenger(string secondName = null, string firstName = null) => new (1, secondName ?? "О'Брайен", firstName ?? "Уолтер");
 
-        private static Airplane GenerateAirplane(string type = null, double size = 350.29, string tailNumber = null, double totalWeight = 145.2,
-            char airplaneClass = 'A', int seatsCount = 286, double flightRange = 10000.252)
-        {
-            return new Airplane(123, type ?? "Common", size, tailNumber ?? "AA44", totalWeight, airplaneClass, seatsCount, flightRange);
-        }
+        private static Direction GenerateDirection(string from = null, string to = null) => new (from ?? "Москва", to ?? "Рязань");
     }
 }

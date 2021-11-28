@@ -91,6 +91,7 @@ namespace Domain
                 }
             }
         }
+
         /// <summary>
         /// Уникальный индентификатор.
         /// </summary>
@@ -135,6 +136,11 @@ namespace Domain
         /// Коллекция рейсов.
         /// </summary>
         public ISet<Flight> Flights { get; protected set; } = new HashSet<Flight>();
+
+        /// <summary>
+        /// Класс самолета.
+        /// </summary>
+        public object AirplaneClass { get; set; }
 
         /// <inheritdoc/>
         public override string ToString() => this.CommonInfo;

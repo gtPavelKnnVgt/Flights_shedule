@@ -42,13 +42,13 @@ namespace Domain.Tests
             Assert.DoesNotThrow(() => _ = GenerateFlight(900));
         }
 
-        private static Passenger GeneratePassenger(string secondName = null, string firstName = null) => new Passenger(1, secondName ?? "О'Брайен", firstName ?? "Уолтер");
+        private static Passenger GeneratePassenger(string secondName = null, string firstName = null) => new (1, secondName ?? "О'Брайен", firstName ?? "Уолтер");
 
-        private static Flight GenerateFlight(int flightNumber = 1, int ticketPrice = 1000, string direction = null,
-            string departureTime = null, string arrivalTime = null)
+        private static Flight GenerateFlight(int flightNumber = 1, int ticketPrice = 1000, Direction direction = null, string departureTime = null, string arrivalTime = null)
         {
-            return new Flight(flightNumber, ticketPrice,
-                    direction ?? "Москва - Минск",
+            return new (
+                    flightNumber, ticketPrice,
+                    direction ?? new("Москва", "Рязань"),
                     departureTime ?? "12:30",
                     arrivalTime ?? "15:00");
         }

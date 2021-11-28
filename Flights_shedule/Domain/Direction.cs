@@ -34,5 +34,8 @@ namespace Domain
         /// Город прилёта.
         /// </summary>
         public string To { get; protected set; }
+
+        /// <inheritdoc/>
+        public override string ToString() => $"{this.From}-{this.To}";
     }
 }
