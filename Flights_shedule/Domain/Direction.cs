@@ -35,6 +35,11 @@ namespace Domain
         /// </summary>
         public string To { get; protected set; }
 
+        /// <summary>
+        /// Коллекция Рейсов.
+        /// </summary>
+        public ISet<Flight> Flights { get; protected set; } = new HashSet<Flight>();
+
         /// <inheritdoc/>
         public override string ToString() => $"{this.From}-{this.To}";
     }
