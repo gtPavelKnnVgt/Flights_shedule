@@ -48,7 +48,7 @@ namespace Domain.Tests
         {
             return new (
                     flightNumber, ticketPrice,
-                    direction ?? new("Москва", "Рязань"),
+                    direction ?? new(1, "Москва", "Рязань"),
                     departureTime ?? "12:30",
                     arrivalTime ?? "15:00");
         }

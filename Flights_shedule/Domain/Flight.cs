@@ -61,44 +61,47 @@ namespace Domain
         }
 
         /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Flight"/>.
+        /// </summary>
+        [Obsolete("For ORM only", true)]
+        protected Flight()
+        {
+        }
+
+        /// <summary>
         /// Номер рейса (уникальный идентификатор).
         /// </summary>
-        public int FlightNumber { get; protected set; }
+        public virtual int FlightNumber { get; protected set; }
 
         /// <summary>
         /// Список пассажиров.
         /// </summary>
-        public ISet<Passenger> Passengers { get; protected set; } = new HashSet<Passenger>();
+        public virtual ISet<Passenger> Passengers { get; protected set; } = new HashSet<Passenger>();
 
         /// <summary>
         /// Стоимость билета.
         /// </summary>
-        public int TicketPrice { get; protected set; }
+        public virtual int TicketPrice { get; protected set; }
 
         /// <summary>
         /// Направление.
         /// </summary>
-        public Direction Direction { get; protected set; }
+        public virtual Direction Direction { get; protected set; }
 
         /// <summary>
         /// Время вылета.
         /// </summary>
-        public string DepartureTime { get; protected set; }
+        public virtual string DepartureTime { get; protected set; }
 
         /// <summary>
         /// Время прилёта.
         /// </summary>
-        public string ArrivalTime { get; protected set; }
-
-        /// <summary>
-        /// Идентификационный номер самолёта.
-        /// </summary>
-        public int AirPlaneId { get; protected set; }
+        public virtual string ArrivalTime { get; protected set; }
 
         /// <summary>
         /// Самолёт.
         /// </summary>
-        public Airplane Airplane { get; protected set; }
+        public virtual Airplane Airplane { get; protected set; }
 
         /// <inheritdoc/>
         public override string ToString()

@@ -3,6 +3,7 @@
 // </copyright>
 namespace ORM.Mappings
 {
+    using System;
     using Domain;
     using FluentNHibernate.Mapping;
 
@@ -24,7 +25,7 @@ namespace ORM.Mappings
             this.Map(x => x.Size);
             this.Map(x => x.TailNumber);
             this.Map(x => x.TotalWeight);
-            this.Map(x => x.AirplaneClass);
+            this.Map(x => ((char)x.AirplaneClass));
             this.Map(x => x.SeatsCount);
             this.Map(x => x.FlightRange);
 

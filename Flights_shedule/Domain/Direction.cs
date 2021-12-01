@@ -18,29 +18,44 @@ namespace Domain
         /// </summary>
         /// <param name="from">Город вылета.</param>
         /// <param name="to">Город прилёта.</param>
-        public Direction(string from, string to)
+        public Direction(int id, string startLocation, string endLocation)
         {
-            this.From = from.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(from));
+            this.Id = id;
 
-            this.To = to.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(to));
+            this.startLocation = startLocation.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(startLocation));
+
+            this.endLocation = endLocation.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(endLocation));
         }
+
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Direction"/>.
+        /// </summary>
+        [Obsolete("For ORM only", true)]
+        protected Direction()
+        {
+        }
+
+        /// <summary>
+        /// Уникальный индентификатор.
+        /// </summary>
+        public virtual int Id { get; protected set; }
 
         /// <summary>
         /// Город вылета.
         /// </summary>
-        public string From { get; protected set; }
+        public virtual string startLocation { get; protected set; }
 
         /// <summary>
         /// Город прилёта.
         /// </summary>
-        public string To { get; protected set; }
+        public virtual string endLocation { get; protected set; }
 
         /// <summary>
         /// Коллекция Рейсов.
         /// </summary>
-        public ISet<Flight> Flights { get; protected set; } = new HashSet<Flight>();
+        public virtual ISet<Flight> Flights { get; protected set; } = new HashSet<Flight>();
 
         /// <inheritdoc/>
-        public override string ToString() => $"{this.From}-{this.To}";
+        public override string ToString() => $"{this.startLocation}-{this.endLocation}";
     }
 }

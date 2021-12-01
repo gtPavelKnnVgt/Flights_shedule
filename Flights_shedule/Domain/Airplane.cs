@@ -93,54 +93,62 @@ namespace Domain
         }
 
         /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Airplane"/>.
+        /// </summary>
+        [Obsolete("For ORM only", true)]
+        protected Airplane()
+        {
+        }
+
+        /// <summary>
         /// Уникальный индентификатор.
         /// </summary>
-        public int Id { get; protected set; }
+        public virtual int Id { get; protected set; }
 
         /// <summary>
         /// Общая информация.
         /// </summary>
-        public string CommonInfo => $"{this.Type}, {this.TailNumber}, {this.SeatsCount}, {this.TotalWeight} ".Trim();
+        public virtual string CommonInfo => $"{this.Type}, {this.TailNumber},{(char)this.AirplaneClass}, {this.SeatsCount}, {this.TotalWeight} ".Trim();
 
         /// <summary>
         /// Тип самолёта.
         /// </summary>
-        public string Type { get; protected set; }
+        public virtual string Type { get; protected set; }
 
         /// <summary>
         /// Размер самолёта.
         /// </summary>
-        public double Size { get; protected set; }
+        public virtual double Size { get; protected set; }
 
         /// <summary>
         /// Бортовой номер.
         /// </summary>
-        public string TailNumber { get; protected set; }
+        public virtual string TailNumber { get; protected set; }
 
         /// <summary>
         /// Общая масса.
         /// </summary>
-        public double TotalWeight { get; protected set; }
+        public virtual double TotalWeight { get; protected set; }
 
         /// <summary>
         /// Количество мест в самолёте.
         /// </summary>
-        public int SeatsCount { get; protected set; }
+        public virtual int SeatsCount { get; protected set; }
 
         /// <summary>
         /// Дальность полёта.
         /// </summary>
-        public double FlightRange { get; protected set; }
+        public virtual double FlightRange { get; protected set; }
 
         /// <summary>
         /// Коллекция рейсов.
         /// </summary>
-        public ISet<Flight> Flights { get; protected set; } = new HashSet<Flight>();
+        public virtual ISet<Flight> Flights { get; protected set; } = new HashSet<Flight>();
 
         /// <summary>
         /// Класс самолета.
         /// </summary>
-        public object AirplaneClass { get; set; }
+        public virtual AirplaneClasses AirplaneClass { get; protected set; }
 
         /// <inheritdoc/>
         public override string ToString() => this.CommonInfo;

@@ -28,39 +28,42 @@ namespace Domain
         }
 
         /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Passenger"/>.
+        /// </summary>
+        [Obsolete("For ORM only", true)]
+        protected Passenger()
+        {
+        }
+
+        /// <summary>
         /// Идентификационный номер пассажира.
         /// </summary>
-        public int Id { get; protected set; }
+        public virtual int Id { get; protected set; }
 
         /// <summary>
         /// Фамилия.
         /// </summary>
-        public string LastName { get; protected set; }
+        public virtual string LastName { get; protected set; }
 
         /// <summary>
         /// Имя.
         /// </summary>
-        public string FirstName { get; protected set; }
+        public virtual string FirstName { get; protected set; }
 
         /// <summary>
         /// Полное имя.
         /// </summary>
-        public string FullName => $"{this.LastName} {this.FirstName[0]}. ".Trim();
+        public virtual string FullName => $"{this.LastName} {this.FirstName[0]}. ".Trim();
 
         /// <summary>
         /// Номер паспорта.
         /// </summary>
-        public int Passport { get; protected set; }
-
-        /// <summary>
-        /// Идентификационный номер рейса.
-        /// </summary>
-        public int FlightId { get; protected set; }
+        public virtual int Passport { get; protected set; }
 
         /// <summary>
         /// Рейс.
         /// </summary>
-        public Flight Flight { get; protected set; }
+        public virtual Flight Flight { get; protected set; }
 
         /// <inheritdoc/>
         public override string ToString() => this.FullName;

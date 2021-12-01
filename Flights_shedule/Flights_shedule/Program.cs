@@ -9,10 +9,10 @@ namespace Flights_shedule
     {
         private static void Main(string[] args)
         {
-            var direction = new Domain.Direction("Москва", "Минск");
+            var direction = new Domain.Direction(1, "Москва", "Минск");
             var passenger = new Domain.Passenger(1, "Дюсов", "Михаил");
             var flight = new Domain.Flight(1, 1000, direction, "12:30", "15:00", passenger);
-            var airplane = new Domain.Airplane(888, "Military", 350.29, "AA44", 5000.532, 0, 286, 10000.252);
+            var airplane = new Domain.Airplane(888, "Military", 350.29, "AA44", 5000.532, Domain.AirplaneClasses.A, 286, 10000.252);
             Console.WriteLine($"{flight}");
             Console.WriteLine($"{ passenger}");
             Console.WriteLine($"{ airplane}");

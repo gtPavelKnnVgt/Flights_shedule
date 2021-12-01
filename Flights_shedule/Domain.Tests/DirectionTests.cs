@@ -41,6 +41,6 @@ namespace Domain.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateDirection(string.Empty, string.Empty));
         }
 
-        private static Direction GenerateDirection(string from = null, string to = null) => new (from ?? "Москва", to ?? "Рязань");
+        private static Direction GenerateDirection(string from = null, string to = null) => new (1, from ?? "Москва", to ?? "Рязань");
     }
 }

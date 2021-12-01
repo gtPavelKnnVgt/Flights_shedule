@@ -118,7 +118,7 @@ namespace Domain.Tests
             Assert.DoesNotThrow(() => _ = GenerateAirplane("MIL", 550.50, "PRE3000"));
         }
 
-        private static Airplane GenerateAirplane(string type = null, double size = 350.29, string tailNumber = null, double totalWeight = 5000.25, AirplaneClasses airplaneClass = 0, int seatsCount = 286, double flightRange = 10000.252)
+        private static Airplane GenerateAirplane(string type = null, double size = 350.29, string tailNumber = null, double totalWeight = 5000.25, AirplaneClasses airplaneClass = AirplaneClasses.A, int seatsCount = 286, double flightRange = 10000.252)
         {
             return new (123, type ?? "Common", size, tailNumber ?? "AA44", totalWeight, airplaneClass, seatsCount, flightRange);
         }

@@ -80,13 +80,13 @@ namespace Domain.Tests
         private static Flight GenerateFlight(Passenger passenger, int flightNumber = 197, int ticketPrice = 1000, Direction direction = null, string departureTime = null, string arrivalTime = null)
         {
             return new (flightNumber, ticketPrice,
-               direction ?? new ("Москва", "Рязань"),
+               direction ?? new (1, "Москва", "Рязань"),
                departureTime ?? "12:30",
                arrivalTime ?? "15:00", passenger);
         }
 
         private static Passenger GeneratePassenger(string secondName = null, string firstName = null) => new (1, secondName ?? "О'Брайен", firstName ?? "Уолтер");
 
-        private static Direction GenerateDirection(string from = null, string to = null) => new (from ?? "Москва", to ?? "Рязань");
+        private static Direction GenerateDirection(string from = null, string to = null) => new (1, from ?? "Москва", to ?? "Рязань");
     }
 }

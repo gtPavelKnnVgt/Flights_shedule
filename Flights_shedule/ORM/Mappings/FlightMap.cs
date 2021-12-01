@@ -23,7 +23,8 @@ namespace ORM.Mappings
             this.Map(x => x.DepartureTime);
             this.Map(x => x.ArrivalTime);
             this.Map(x => x.TicketPrice);
-            this.Map(x => x.Direction);
+
+            this.References(x => x.Direction);
 
             this.References(x => x.Airplane);
 
