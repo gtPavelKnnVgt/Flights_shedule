@@ -19,7 +19,7 @@ namespace Domain.Tests
             var result = airplane.ToString();
 
             // assert
-            Assert.AreEqual("Common, AA44, 286, 5000,25", result);
+            Assert.AreEqual("Common, AA44,A, 286, 5000,25", result);
         }
 
         [Test]

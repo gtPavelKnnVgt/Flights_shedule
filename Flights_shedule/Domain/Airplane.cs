@@ -49,11 +49,6 @@ namespace Domain
     public class Airplane
     {
         /// <summary>
-        /// Классификатор самолёта.
-        /// </summary> 
-        private readonly AirplaneClasses airplaneClass;
-
-        /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Airplane"/>.
         /// </summary>
         /// <param name="id">Уникальный идентификатор.</param>
@@ -77,7 +72,7 @@ namespace Domain
 
             this.TotalWeight = totalWeight.NullOrNegative()?.WeightCheck() ?? throw new ArgumentOutOfRangeException(nameof(totalWeight));
 
-            this.airplaneClass = airplaneClass;
+            this.AirplaneClass = airplaneClass;
 
             this.SeatsCount = seatsCount.NullOrNegative()?.SeatRange() ?? throw new ArgumentOutOfRangeException(nameof(seatsCount));
 
@@ -108,7 +103,7 @@ namespace Domain
         /// <summary>
         /// Общая информация.
         /// </summary>
-        public virtual string CommonInfo => $"{this.Type}, {this.TailNumber},{(char)this.AirplaneClass}, {this.SeatsCount}, {this.TotalWeight} ".Trim();
+        public virtual string CommonInfo => $"{this.Type}, {this.TailNumber},{this.AirplaneClass}, {this.SeatsCount}, {this.TotalWeight} ".Trim();
 
         /// <summary>
         /// Тип самолёта.

@@ -16,8 +16,9 @@ namespace Domain
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Direction"/>.
         /// </summary>
-        /// <param name="from">Город вылета.</param>
-        /// <param name="to">Город прилёта.</param>
+        ///  /// <param name="id">Уникальный идентификатор.</param>
+        /// <param name="startLocation">Город вылета.</param>
+        /// <param name="endLocation">Город прилёта.</param>
         public Direction(int id, string startLocation, string endLocation)
         {
             this.Id = id;
