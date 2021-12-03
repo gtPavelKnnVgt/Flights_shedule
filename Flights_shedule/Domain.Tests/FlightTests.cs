@@ -63,7 +63,7 @@ namespace Domain.Tests
         public void Ctor_WrongData_TicketPriceIsNull_Fail()
         {
             var passenger = GeneratePassenger();
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = new Flight(0, 0, "12:30", "15:00"));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, 23, 0, "12:30", "15:00"));
         }
 
         private static Flight GenerateFlight(Passenger passenger, int flightNumber = 197, int ticketPrice = 1000, string departureTime = null, string arrivalTime = null)
