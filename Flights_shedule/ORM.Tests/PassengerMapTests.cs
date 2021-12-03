@@ -12,7 +12,7 @@ namespace ORM.Tests
     /// Модульные тесты для класса <see cref="ORM.Mappings.PassengerMap"/>.
     /// </summary>
     [TestFixture]
-    public class PassengerMapTest : BaseMapTests
+    public class PassengerMapTests : BaseMapTests
     {
         [Test]
         public void PersistenceSpecification_ValidSimpleData_Success()
@@ -30,9 +30,9 @@ namespace ORM.Tests
         {
             // arrange
             var passenger = new Passenger(1, "Дюсов", "Михаил");
-            var direction = new Direction(1, "Москва", "Минск");
 
-            var flight = new Flight(1, 1000, direction, "12:30", "15:00", passenger);
+            var flight = new Flight(1, 1000, "12:30", "15:00", passenger);
+            var direction = new Direction(1, "Москва", "Минск", flight);
 
             // act & assert
             new PersistenceSpecification<Passenger>(this.Session)

@@ -48,6 +48,11 @@ namespace Domain
     /// </summary>
     public class Airplane
     {
+
+        public Airplane(int id, string type, double size, string tailNumber, double totalWeight, AirplaneClasses airplaneClass, int seatsCount, double flightRange, params Flight[] flights)
+            : this(id, type, size, tailNumber, totalWeight, airplaneClass, seatsCount, flightRange, new HashSet<Flight>(flights))
+        { 
+        }
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Airplane"/>.
         /// </summary>

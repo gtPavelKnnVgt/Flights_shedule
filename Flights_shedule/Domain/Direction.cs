@@ -13,19 +13,26 @@ namespace Domain
     /// </summary>
     public class Direction
     {
+        public Direction(int id, string startLocation, string endLocation, params Flight[] flights)
+            :this( id,  startLocation,  endLocation, new HashSet<Flight>(flights))
+        {
+
+        }
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Direction"/>.
         /// </summary>
         ///  /// <param name="id">Уникальный идентификатор.</param>
         /// <param name="startLocation">Город вылета.</param>
         /// <param name="endLocation">Город прилёта.</param>
-        public Direction(int id, string startLocation, string endLocation)
+        public Direction(int id, string startLocation, string endLocation, ISet<Flight> flights)
         {
             this.Id = id;
 
             this.startLocation = startLocation.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(startLocation));
 
             this.endLocation = endLocation.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(endLocation));
+
+            this.Flights = flights;
         }
 
         /// <summary>

@@ -22,7 +22,7 @@ namespace ORM.Mappings
             this.Map(x => x.startLocation);
             this.Map(x => x.endLocation);
 
-            this.HasMany(x => x.Flights).Not.Inverse();
+            this.HasMany(x => x.Flights);
         }
     }
 }
