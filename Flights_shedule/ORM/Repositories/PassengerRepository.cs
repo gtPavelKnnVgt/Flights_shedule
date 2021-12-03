@@ -15,11 +15,15 @@ namespace ORM.Repositories
     /// </summary>
     public class PassengerRepository : IRepository<Passenger>
     {
-        private ISession session;
+        private readonly ISession _session;
 
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="PassengerRepository"/>.
+        /// </summary>
+        /// <param name="session">Сессия для Пассажиров.</param>
         public PassengerRepository(ISession session)
         {
-            this.session = session
+            this._session = session
                 ?? throw new ArgumentNullException(nameof(session));
         }
 
@@ -38,13 +42,47 @@ namespace ORM.Repositories
         /// <inheritdoc/>
         public Passenger Get(int id)
         {
-            return this.session.Get<Passenger>(id);
+            return this._session.Get<Passenger>(id);
         }
 
         /// <inheritdoc/>
         public IQueryable<Passenger> GetAll()
         {
-            return this.session.Query<Passenger>();
+            return this._session.Query<Passenger>();
+        }
+
+        /// <inheritdoc/>
+        public bool TryGet(int id, out Passenger passenger)
+        {
+            passenger = this.GetAll().SingleOrDefault(p => p.Id == id);
+            return passenger != null;
+        }
+
+        /// <inheritdoc/>
+        public Passenger Create(Passenger passenger)
+        {
+            var id = (int)this._session.Save(passenger);
+            this._session.Flush();
+            return passenger;
+        }
+
+        /// <inheritdoc/>
+        public void Delete(int id)
+        {
+            if (!this.TryGet(id, out var passenger))
+            {
+                return;
+            }
+
+            this._session.Delete(passenger);
+            this._session.Flush();
+        }
+
+        /// <inheritdoc/>
+        public void Update(Passenger passenger)
+        {
+            this._session.Update(passenger);
+            this._session.Flush();
         }
     }
 }

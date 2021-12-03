@@ -15,8 +15,12 @@ namespace ORM.Repositories
     /// </summary>
     public class AirplaneRepository : IRepository<Airplane>
     {
-        private ISession _session;
+        private readonly ISession _session;
 
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="AirplaneRepository"/>.
+        /// </summary>
+        /// <param name="session">Сессия для самолётов.</param>
         public AirplaneRepository(ISession session)
         {
             this._session = session
@@ -26,6 +30,11 @@ namespace ORM.Repositories
         /// <inheritdoc/>
         public IQueryable<Airplane> Filter(Expression<Func<Airplane, bool>> predicate)
         {
+            if (predicate == null)
+            {
+                throw new ArgumentNullException(nameof(predicate));
+            }
+
             return this.GetAll().Where(predicate);
         }
 
@@ -45,6 +54,40 @@ namespace ORM.Repositories
         public IQueryable<Airplane> GetAll()
         {
             return this._session.Query<Airplane>();
+        }
+
+        /// <inheritdoc/>
+        public bool TryGet(int id, out Airplane airplane)
+        {
+            airplane = this.GetAll().SingleOrDefault(a => a.Id == id);
+            return airplane != null;
+        }
+
+        /// <inheritdoc/>
+        public Airplane Create(Airplane airplane)
+        {
+            var id = (int)this._session.Save(airplane);
+            this._session.Flush();
+            return airplane;
+        }
+
+        /// <inheritdoc/>
+        public void Delete(int id)
+        {
+            if (!this.TryGet(id, out var airplane))
+            {
+                return;
+            }
+
+            this._session.Delete(airplane);
+            this._session.Flush();
+        }
+
+        /// <inheritdoc/>
+        public void Update(Airplane airplane)
+        {
+            this._session.Update(airplane);
+            this._session.Flush();
         }
     }
 }

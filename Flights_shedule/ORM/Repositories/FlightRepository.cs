@@ -15,8 +15,12 @@ namespace ORM.Repositories
     /// </summary>
     public class FlightRepository : IRepository<Flight>
     {
-        private ISession _session;
+        private readonly ISession _session;
 
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="FlightRepository"/>.
+        /// </summary>
+        /// <param name="session">Сессия для рейсов.</param>
         public FlightRepository(ISession session)
         {
             this._session = session
@@ -45,6 +49,40 @@ namespace ORM.Repositories
         public IQueryable<Flight> GetAll()
         {
             return this._session.Query<Flight>();
+        }
+
+        /// <inheritdoc/>
+        public bool TryGet(int id, out Flight flight)
+        {
+            flight = this.GetAll().SingleOrDefault(f => f.FlightNumber == id);
+            return flight != null;
+        }
+
+        /// <inheritdoc/>
+        public Flight Create(Flight flight)
+        {
+            var id = (int)this._session.Save(flight);
+            this._session.Flush();
+            return flight;
+        }
+
+        /// <inheritdoc/>
+        public void Delete(int id)
+        {
+            if (!this.TryGet(id, out var flight))
+            {
+                return;
+            }
+
+            this._session.Delete(flight);
+            this._session.Flush();
+        }
+
+        /// <inheritdoc/>
+        public void Update(Flight flight)
+        {
+            this._session.Update(flight);
+            this._session.Flush();
         }
     }
 }
