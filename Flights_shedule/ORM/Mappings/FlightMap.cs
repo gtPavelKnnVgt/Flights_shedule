@@ -28,7 +28,7 @@ namespace ORM.Mappings
 
             this.References(x => x.Airplane);
 
-            this.HasMany(x => x.Passengers).Inverse();
+            this.HasMany(x => x.Passengers).Not.Inverse();
         }
     }
 }
