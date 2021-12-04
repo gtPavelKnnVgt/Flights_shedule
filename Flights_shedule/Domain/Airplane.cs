@@ -123,7 +123,7 @@ namespace Domain
         /// <summary>
         /// Бортовой номер.
         /// </summary>
-        public virtual string TailNumber { get; protected set; }
+        public virtual string TailNumber { get; set; }
 
         /// <summary>
         /// Общая масса.

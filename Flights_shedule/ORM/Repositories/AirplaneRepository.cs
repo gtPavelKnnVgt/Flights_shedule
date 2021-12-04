@@ -47,7 +47,7 @@ namespace ORM.Repositories
         /// <inheritdoc/>
         public Airplane Get(int id)
         {
-            return this._session.Get<Airplane>(id);
+            return this.GetAll().SingleOrDefault<Airplane>(a => a.Id == id);
         }
 
         /// <inheritdoc/>

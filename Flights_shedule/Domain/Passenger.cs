@@ -43,12 +43,12 @@ namespace Domain
         /// <summary>
         /// Фамилия.
         /// </summary>
-        public virtual string LastName { get; protected set; }
+        public virtual string LastName { get; set; }
 
         /// <summary>
         /// Имя.
         /// </summary>
-        public virtual string FirstName { get; protected set; }
+        public virtual string FirstName { get; set; }
 
         /// <summary>
         /// Полное имя.

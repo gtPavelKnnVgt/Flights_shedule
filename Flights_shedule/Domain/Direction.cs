@@ -51,12 +51,12 @@ namespace Domain
         /// <summary>
         /// Город вылета.
         /// </summary>
-        public virtual string startLocation { get; protected set; }
+        public virtual string startLocation { get; set; }
 
         /// <summary>
         /// Город прилёта.
         /// </summary>
-        public virtual string endLocation { get; protected set; }
+        public virtual string endLocation { get; set; }
 
         /// <summary>
         /// Коллекция Рейсов.

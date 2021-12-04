@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Tests", "Domain.Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ORM", "ORM\ORM.csproj", "{DABCD5C8-B9D4-4D76-833A-11BA431C5725}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORM.Tests", "ORM.Tests\ORM.Tests.csproj", "{8C94893C-163D-4BDB-95C5-EEFF9921F545}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ORM.Tests", "ORM.Tests\ORM.Tests.csproj", "{8C94893C-163D-4BDB-95C5-EEFF9921F545}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Tests", "Repository.Tests\Repository.Tests.csproj", "{E747D41F-6EA2-489F-99FE-CE0FCEC1AADC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{8C94893C-163D-4BDB-95C5-EEFF9921F545}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C94893C-163D-4BDB-95C5-EEFF9921F545}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C94893C-163D-4BDB-95C5-EEFF9921F545}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E747D41F-6EA2-489F-99FE-CE0FCEC1AADC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E747D41F-6EA2-489F-99FE-CE0FCEC1AADC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E747D41F-6EA2-489F-99FE-CE0FCEC1AADC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E747D41F-6EA2-489F-99FE-CE0FCEC1AADC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

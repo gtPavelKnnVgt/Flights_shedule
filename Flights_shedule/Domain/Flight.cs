@@ -88,12 +88,12 @@ namespace Domain
         /// <summary>
         /// Время вылета.
         /// </summary>
-        public virtual string DepartureTime { get; protected set; }
+        public virtual string DepartureTime { get; set; }
 
         /// <summary>
         /// Время прилёта.
         /// </summary>
-        public virtual string ArrivalTime { get; protected set; }
+        public virtual string ArrivalTime { get; set; }
 
         /// <summary>
         /// Самолёт.
