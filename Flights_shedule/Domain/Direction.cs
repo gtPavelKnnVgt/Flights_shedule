@@ -61,7 +61,7 @@ namespace Domain
         /// <summary>
         /// Коллекция Рейсов.
         /// </summary>
-        public virtual ISet<Flight> Flights { get; protected set; } = new HashSet<Flight>();
+        public virtual ISet<Flight> Flights { get; set; } = new HashSet<Flight>();
 
         /// <inheritdoc/>
         public override string ToString() => $"{this.startLocation}-{this.endLocation}";

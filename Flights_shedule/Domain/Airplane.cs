@@ -143,7 +143,7 @@ namespace Domain
         /// <summary>
         /// Коллекция рейсов.
         /// </summary>
-        public virtual ISet<Flight> Flights { get; protected set; } = new HashSet<Flight>();
+        public virtual ISet<Flight> Flights { get; set; } = new HashSet<Flight>();
 
         /// <summary>
         /// Класс самолета.

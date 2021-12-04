@@ -38,8 +38,8 @@ namespace ORM
         {
             var databaseConfiguration = MsSqlConfiguration.MsSql2012.ConnectionString(
                 x => x
-                    .Server(@"????????") // вставить наши данные
-                    .Database("?????????") // вставить наши данные
+                    .Server(@"PAVEL") // вставить наши данные
+                    .Database("FlightShedule") // вставить наши данные
                     .TrustedConnection());
 
             if (showSql)
