@@ -9,7 +9,7 @@ namespace ORM.Tests
     using NUnit.Framework;
 
     /// <summary>
-    /// Модульные тесты для класса <see cref="ORM.Mappings.PassengerMap"/>.
+    /// Модульные тесты для класса <see cref="Mappings.PassengerMap"/>.
     /// </summary>
     [TestFixture]
     public class PassengerMapTests : BaseMapTests
@@ -36,7 +36,7 @@ namespace ORM.Tests
 
             // act & assert
             new PersistenceSpecification<Passenger>(this.Session)
-            
+
                 .VerifyTheMappings(passenger);
         }
     }

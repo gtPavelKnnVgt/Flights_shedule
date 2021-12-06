@@ -1,6 +1,7 @@
 ﻿// <copyright file="Airplane.cs" company="МИИТ">
 // Copyright (c) Дюсов М. А. All rights reserved.
 // </copyright>
+
 namespace Domain
 {
     using System;
@@ -49,10 +50,23 @@ namespace Domain
     public class Airplane
     {
 
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Airplane"/>.
+        /// </summary>
+        /// <param name="id">Уникальный идентификатор.</param>
+        /// <param name="type">Тип самолёта.</param>
+        /// <param name="size">Размер самолёта.</param>
+        /// <param name="tailNumber">Бортовой номер.</param>
+        /// <param name="totalWeight">Общая масса самолёта.</param>
+        /// <param name="airplaneClass">Классификатор самолёта.</param>
+        /// <param name="seatsCount">Количество мест.</param>
+        /// <param name="flightRange">Дальность полёта.</param>
+        /// <param name="flights">Рейсы, на которых летает данный самолёт.</param>
         public Airplane(int id, string type, double size, string tailNumber, double totalWeight, AirplaneClasses airplaneClass, int seatsCount, double flightRange, params Flight[] flights)
             : this(id, type, size, tailNumber, totalWeight, airplaneClass, seatsCount, flightRange, new HashSet<Flight>(flights))
-        { 
+        {
         }
+
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Airplane"/>.
         /// </summary>

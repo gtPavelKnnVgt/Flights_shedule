@@ -1,4 +1,4 @@
-﻿// <copyright file="IRepository.cs" company="МИИТ">
+﻿// <copyright file="AirplaneRepository.cs" company="МИИТ">
 // Copyright (c) Кононов П.А. All rights reserved.
 // </copyright>
 

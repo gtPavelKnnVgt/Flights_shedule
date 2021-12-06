@@ -13,11 +13,18 @@ namespace Domain
     /// </summary>
     public class Direction
     {
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Direction"/>.
+        /// </summary>
+        /// <param name="id">Уникальный идентификатор.</param>
+        /// <param name="startLocation">Город вылета.</param>
+        /// <param name="endLocation">Город прилёта.</param>
+        /// <param name="flights">Рейсы имеющие данное направление.</param>
         public Direction(int id, string startLocation, string endLocation, params Flight[] flights)
-            :this( id,  startLocation,  endLocation, new HashSet<Flight>(flights))
+            : this(id, startLocation, endLocation, new HashSet<Flight>(flights))
         {
-
         }
+
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Direction"/>.
         /// </summary>

@@ -1,6 +1,7 @@
 ﻿// <copyright file="Passenger.cs" company="МИИТ">
 // Copyright (c) МИИТ. All rights reserved.
 // </copyright>
+
 namespace Domain
 {
     using System;

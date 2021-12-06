@@ -1,9 +1,9 @@
 ﻿// <copyright file="AirplaneMap.cs" company="МИИТ">
 // Copyright (c) Пузаков А. С. All rights reserved.
 // </copyright>
+
 namespace ORM.Mappings
 {
-    using System;
     using Domain;
     using FluentNHibernate.Mapping;
 

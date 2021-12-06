@@ -1,6 +1,7 @@
 ﻿// <copyright file="FlightTests.cs" company="МИИТ">
 // Copyright (c) Кононов П. А. All rights reserved.
 // </copyright>
+
 namespace Domain.Tests
 {
     using System;
@@ -68,7 +69,7 @@ namespace Domain.Tests
 
         private static Flight GenerateFlight(Passenger passenger, int flightNumber = 197, int ticketPrice = 1000, string departureTime = null, string arrivalTime = null)
         {
-            return new(flightNumber, ticketPrice,
+            return new (flightNumber, ticketPrice,
                departureTime ?? "12:30",
                arrivalTime ?? "15:00", passenger);
         }

@@ -1,11 +1,15 @@
-﻿namespace ORM.Tests
+﻿// <copyright file="BaseMapTests.cs" company="МИИТ">
+// Copyright (c) Пузаков А.В. All rights reserved.
+// </copyright>
+
+namespace ORM.Tests
 {
     using Domain;
     using FluentNHibernate.Testing;
     using NUnit.Framework;
 
     /// <summary>
-    /// Модульные тесты для класса <see cref="ORM.Mappings.FlightMap"/>.
+    /// Модульные тесты для класса <see cref="Mappings.FlightMap"/>.
     /// </summary>
     [TestFixture]
     public class FlightMapTests : BaseMapTests

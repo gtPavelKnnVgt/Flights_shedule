@@ -77,6 +77,7 @@ namespace ORM.Repositories
             this._session.Delete(direction);
             this._session.Flush();
         }
+
         /// <inheritdoc/>
         public void Update(Direction direction)
         {

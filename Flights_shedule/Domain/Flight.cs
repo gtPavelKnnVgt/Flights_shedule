@@ -1,6 +1,7 @@
 ﻿// <copyright file=Flight.cs" company="МИИТ">
 // Copyright (c) Дюсов М.А All rights reserved.
 // </copyright>
+
 namespace Domain
 {
     using System;

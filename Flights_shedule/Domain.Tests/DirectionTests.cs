@@ -1,6 +1,7 @@
 ﻿// <copyright file="DirectionTests.cs" company="МИИТ">
 // Copyright (c) Кононов П. А. All rights reserved.
 // </copyright>
+
 namespace Domain.Tests
 {
     using System;

@@ -1,6 +1,7 @@
 ﻿// <copyright file="BaseMapTests.cs" company="МИИТ">
 // Copyright (c) Кононов П.А. All rights reserved.
 // </copyright>
+
 namespace ORM.Tests
 {
     using NHibernate;
