@@ -5,7 +5,7 @@
     using NUnit.Framework;
 
     /// <summary>
-    /// Модульные тесты для класса <see cref="ORM.Mappings.PassengerMap"/>.
+    /// Модульные тесты для класса <see cref="ORM.Mappings.FlightMap"/>.
     /// </summary>
     [TestFixture]
     public class FlightMapTests : BaseMapTests

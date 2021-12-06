@@ -19,8 +19,8 @@ namespace ORM.Mappings
         {
             this.Table("Direction");
             this.Id(x => x.Id);
-            this.Map(x => x.startLocation);
-            this.Map(x => x.endLocation);
+            this.Map(x => x.StartLocation);
+            this.Map(x => x.EndLocation);
 
             this.HasMany(x => x.Flights);
         }

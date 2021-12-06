@@ -73,7 +73,7 @@ namespace Domain
         /// <summary>
         /// Список пассажиров.
         /// </summary>
-        public virtual ISet<Passenger> Passengers { get; protected set; } = new HashSet<Passenger>();
+        public virtual ISet<Passenger> Passengers { get; set; } = new HashSet<Passenger>();
 
         /// <summary>
         /// Стоимость билета.

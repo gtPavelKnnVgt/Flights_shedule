@@ -21,18 +21,25 @@ namespace Domain
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Direction"/>.
         /// </summary>
-        ///  /// <param name="id">Уникальный идентификатор.</param>
+        /// <param name="id">Уникальный идентификатор.</param>
         /// <param name="startLocation">Город вылета.</param>
         /// <param name="endLocation">Город прилёта.</param>
-        public Direction(int id, string startLocation, string endLocation, ISet<Flight> flights)
+        /// <param name="flights">Рейсы имеющие данное направление.</param>
+        public Direction(int id, string startLocation, string endLocation, ISet<Flight> flights = null)
         {
             this.Id = id;
 
-            this.startLocation = startLocation.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(startLocation));
+            this.StartLocation = startLocation.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(startLocation));
 
-            this.endLocation = endLocation.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(endLocation));
+            this.EndLocation = endLocation.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(endLocation));
 
-            this.Flights = flights;
+            if (flights != null)
+            {
+                foreach (var flight in flights)
+                {
+                    this.Flights.Add(flight);
+                }
+            }
         }
 
         /// <summary>
@@ -51,12 +58,12 @@ namespace Domain
         /// <summary>
         /// Город вылета.
         /// </summary>
-        public virtual string startLocation { get; set; }
+        public virtual string StartLocation { get; set; }
 
         /// <summary>
         /// Город прилёта.
         /// </summary>
-        public virtual string endLocation { get; set; }
+        public virtual string EndLocation { get; set; }
 
         /// <summary>
         /// Коллекция Рейсов.
@@ -64,6 +71,6 @@ namespace Domain
         public virtual ISet<Flight> Flights { get; set; } = new HashSet<Flight>();
 
         /// <inheritdoc/>
-        public override string ToString() => $"{this.startLocation}-{this.endLocation}";
+        public override string ToString() => $"{this.StartLocation}-{this.EndLocation}";
     }
 }
