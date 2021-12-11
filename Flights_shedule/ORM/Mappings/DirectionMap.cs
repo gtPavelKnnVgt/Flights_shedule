@@ -18,11 +18,11 @@ namespace ORM.Mappings
         public DirectionMap()
         {
             this.Table("Direction");
+            this.Id(x => x.Id);
+            this.Map(x => x.StartLocation);
+            this.Map(x => x.EndLocation);
 
-            this.Map(x => x.From);
-            this.Map(x => x.To);
-
-            this.HasMany(x => x.Flights).Not.Inverse();
+            this.HasMany(x => x.Flights);
         }
     }
 }

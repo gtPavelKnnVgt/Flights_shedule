@@ -1,6 +1,7 @@
 ﻿// <copyright file="AirplaneMap.cs" company="МИИТ">
 // Copyright (c) Пузаков А. С. All rights reserved.
 // </copyright>
+
 namespace ORM.Mappings
 {
     using Domain;
@@ -28,7 +29,7 @@ namespace ORM.Mappings
             this.Map(x => x.SeatsCount);
             this.Map(x => x.FlightRange);
 
-            this.HasMany(x => x.Flights).Not.Inverse();
+            this.HasMany(x => x.Flights).Inverse();
         }
     }
 }

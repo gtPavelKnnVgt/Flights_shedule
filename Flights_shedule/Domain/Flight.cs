@@ -1,6 +1,7 @@
 ﻿// <copyright file=Flight.cs" company="МИИТ">
 // Copyright (c) Дюсов М.А All rights reserved.
 // </copyright>
+
 namespace Domain
 {
     using System;
@@ -19,12 +20,11 @@ namespace Domain
         /// </summary>
         /// <param name="flightNumber">Номер рейса.</param>
         /// <param name="ticketPrice">Цена билета.</param>
-        /// <param name="direction">Направление.</param>
         /// <param name="departureTime">Время отправления.</param>
         /// <param name="arrivalTime">Время прибытия.</param>
         /// <param name="passengers">Пассажиры рейса.</param>
-        public Flight(int flightNumber, int ticketPrice, Direction direction, string departureTime, string arrivalTime, params Passenger[] passengers)
-            : this(flightNumber, ticketPrice, direction, departureTime, arrivalTime, new HashSet<Passenger>(passengers))
+        public Flight(int flightNumber, int ticketPrice, string departureTime, string arrivalTime, params Passenger[] passengers)
+            : this(flightNumber, ticketPrice, departureTime, arrivalTime, new HashSet<Passenger>(passengers))
         {
         }
 
@@ -35,17 +35,15 @@ namespace Domain
         /// </summary>
         /// <param name="flightNumber">Номер рейса.</param>
         /// <param name="ticketPrice">Цена билета.</param>
-        /// <param name="direction">Направление.</param>
         /// <param name="departureTime">Время отправления.</param>
         /// <param name="arrivalTime">Время прибытия.</param>
         /// <param name="passengers">Пассажиры рейса.</param>
-        public Flight(int flightNumber, int ticketPrice, Direction direction, string departureTime, string arrivalTime, ISet<Passenger> passengers = null)
+        public Flight(int flightNumber, int ticketPrice, string departureTime, string arrivalTime, ISet<Passenger> passengers = null)
         {
             this.FlightNumber = flightNumber.NullOrNegative() ?? throw new ArgumentOutOfRangeException(nameof(flightNumber));
 
             this.TicketPrice = ticketPrice.NullOrNegative() ?? throw new ArgumentOutOfRangeException(nameof(ticketPrice));
 
-            this.Direction = direction ?? throw new ArgumentOutOfRangeException(nameof(direction));
 
             this.DepartureTime = departureTime.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(departureTime));
 
@@ -61,44 +59,47 @@ namespace Domain
         }
 
         /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Flight"/>.
+        /// </summary>
+        [Obsolete("For ORM only", true)]
+        protected Flight()
+        {
+        }
+
+        /// <summary>
         /// Номер рейса (уникальный идентификатор).
         /// </summary>
-        public int FlightNumber { get; protected set; }
+        public virtual int FlightNumber { get; protected set; }
 
         /// <summary>
         /// Список пассажиров.
         /// </summary>
-        public ISet<Passenger> Passengers { get; protected set; } = new HashSet<Passenger>();
+        public virtual ISet<Passenger> Passengers { get; set; } = new HashSet<Passenger>();
 
         /// <summary>
         /// Стоимость билета.
         /// </summary>
-        public int TicketPrice { get; protected set; }
+        public virtual int TicketPrice { get; protected set; }
 
         /// <summary>
         /// Направление.
         /// </summary>
-        public Direction Direction { get; protected set; }
+        public virtual Direction Direction { get; protected set; }
 
         /// <summary>
         /// Время вылета.
         /// </summary>
-        public string DepartureTime { get; protected set; }
+        public virtual string DepartureTime { get; set; }
 
         /// <summary>
         /// Время прилёта.
         /// </summary>
-        public string ArrivalTime { get; protected set; }
-
-        /// <summary>
-        /// Идентификационный номер самолёта.
-        /// </summary>
-        public int AirPlaneId { get; protected set; }
+        public virtual string ArrivalTime { get; set; }
 
         /// <summary>
         /// Самолёт.
         /// </summary>
-        public Airplane Airplane { get; protected set; }
+        public virtual Airplane Airplane { get; protected set; }
 
         /// <inheritdoc/>
         public override string ToString()

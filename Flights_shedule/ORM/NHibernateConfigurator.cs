@@ -25,12 +25,11 @@ namespace ORM
         /// Фабрика сессий (<see cref = "ISessionFactory"/>).
         /// </summary>
         /// <param name="assembly"> Целевая сборка. </param>
-        /// <param name="tests"></param>
         /// <param name="showSql"> Показывать генерируемый SQL-код. </param>
         /// <returns> Фабрику сессий. </returns>
-        public static ISessionFactory GetSessionFactory(Assembly assembly = null, bool tests = false, bool showSql = false)
+        public static ISessionFactory GetSessionFactory(Assembly assembly = null, bool showSql = false)
         {
-            return GetConfiguration(assembly ?? Assembly.GetExecutingAssembly(), tests, showSql)
+            return GetConfiguration(assembly ?? Assembly.GetExecutingAssembly(), showSql)
                 .BuildSessionFactory();
         }
 
@@ -38,8 +37,8 @@ namespace ORM
         {
             var databaseConfiguration = MsSqlConfiguration.MsSql2012.ConnectionString(
                 x => x
-                    .Server(@"????????") // вставить наши данные
-                    .Database("?????????") // вставить наши данные
+                    .Server(@"PAVEL") // вставить наши данные
+                    .Database("FlightShedule") // вставить наши данные
                     .TrustedConnection());
 
             if (showSql)

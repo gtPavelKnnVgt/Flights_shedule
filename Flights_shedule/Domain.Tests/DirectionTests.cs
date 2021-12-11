@@ -1,6 +1,7 @@
 ﻿// <copyright file="DirectionTests.cs" company="МИИТ">
 // Copyright (c) Кононов П. А. All rights reserved.
 // </copyright>
+
 namespace Domain.Tests
 {
     using System;
@@ -41,6 +42,6 @@ namespace Domain.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateDirection(string.Empty, string.Empty));
         }
 
-        private static Direction GenerateDirection(string from = null, string to = null) => new (from ?? "Москва", to ?? "Рязань");
+        private static Direction GenerateDirection(string from = null, string to = null) => new (1, from ?? "Москва", to ?? "Рязань");
     }
 }

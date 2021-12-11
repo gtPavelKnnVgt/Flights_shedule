@@ -1,6 +1,7 @@
 ﻿// <copyright file="Airplane.cs" company="МИИТ">
 // Copyright (c) Дюсов М. А. All rights reserved.
 // </copyright>
+
 namespace Domain
 {
     using System;
@@ -48,10 +49,23 @@ namespace Domain
     /// </summary>
     public class Airplane
     {
+
         /// <summary>
-        /// Классификатор самолёта.
-        /// </summary> 
-        private readonly AirplaneClasses airplaneClass;
+        /// Инициализирует новый экземпляр класса <see cref="Airplane"/>.
+        /// </summary>
+        /// <param name="id">Уникальный идентификатор.</param>
+        /// <param name="type">Тип самолёта.</param>
+        /// <param name="size">Размер самолёта.</param>
+        /// <param name="tailNumber">Бортовой номер.</param>
+        /// <param name="totalWeight">Общая масса самолёта.</param>
+        /// <param name="airplaneClass">Классификатор самолёта.</param>
+        /// <param name="seatsCount">Количество мест.</param>
+        /// <param name="flightRange">Дальность полёта.</param>
+        /// <param name="flights">Рейсы, на которых летает данный самолёт.</param>
+        public Airplane(int id, string type, double size, string tailNumber, double totalWeight, AirplaneClasses airplaneClass, int seatsCount, double flightRange, params Flight[] flights)
+            : this(id, type, size, tailNumber, totalWeight, airplaneClass, seatsCount, flightRange, new HashSet<Flight>(flights))
+        {
+        }
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="Airplane"/>.
@@ -77,7 +91,7 @@ namespace Domain
 
             this.TotalWeight = totalWeight.NullOrNegative()?.WeightCheck() ?? throw new ArgumentOutOfRangeException(nameof(totalWeight));
 
-            this.airplaneClass = airplaneClass;
+            this.AirplaneClass = airplaneClass;
 
             this.SeatsCount = seatsCount.NullOrNegative()?.SeatRange() ?? throw new ArgumentOutOfRangeException(nameof(seatsCount));
 
@@ -93,54 +107,62 @@ namespace Domain
         }
 
         /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="Airplane"/>.
+        /// </summary>
+        [Obsolete("For ORM only", true)]
+        protected Airplane()
+        {
+        }
+
+        /// <summary>
         /// Уникальный индентификатор.
         /// </summary>
-        public int Id { get; protected set; }
+        public virtual int Id { get; protected set; }
 
         /// <summary>
         /// Общая информация.
         /// </summary>
-        public string CommonInfo => $"{this.Type}, {this.TailNumber}, {this.SeatsCount}, {this.TotalWeight} ".Trim();
+        public virtual string CommonInfo => $"{this.Type}, {this.TailNumber},{this.AirplaneClass}, {this.SeatsCount}, {this.TotalWeight} ".Trim();
 
         /// <summary>
         /// Тип самолёта.
         /// </summary>
-        public string Type { get; protected set; }
+        public virtual string Type { get; protected set; }
 
         /// <summary>
         /// Размер самолёта.
         /// </summary>
-        public double Size { get; protected set; }
+        public virtual double Size { get; protected set; }
 
         /// <summary>
         /// Бортовой номер.
         /// </summary>
-        public string TailNumber { get; protected set; }
+        public virtual string TailNumber { get; set; }
 
         /// <summary>
         /// Общая масса.
         /// </summary>
-        public double TotalWeight { get; protected set; }
+        public virtual double TotalWeight { get; protected set; }
 
         /// <summary>
         /// Количество мест в самолёте.
         /// </summary>
-        public int SeatsCount { get; protected set; }
+        public virtual int SeatsCount { get; protected set; }
 
         /// <summary>
         /// Дальность полёта.
         /// </summary>
-        public double FlightRange { get; protected set; }
+        public virtual double FlightRange { get; protected set; }
 
         /// <summary>
         /// Коллекция рейсов.
         /// </summary>
-        public ISet<Flight> Flights { get; protected set; } = new HashSet<Flight>();
+        public virtual ISet<Flight> Flights { get; set; } = new HashSet<Flight>();
 
         /// <summary>
         /// Класс самолета.
         /// </summary>
-        public object AirplaneClass { get; set; }
+        public virtual AirplaneClasses AirplaneClass { get; protected set; }
 
         /// <inheritdoc/>
         public override string ToString() => this.CommonInfo;
