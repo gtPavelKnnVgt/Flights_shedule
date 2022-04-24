@@ -21,7 +21,7 @@ namespace Domain
         /// <param name="firstName">Имя.</param>
         public Passenger(int id, string lastName, string firstName)
         {
-            this.Id = id;
+            this.Id = id.IsPassedIdentificationCheck() ? id : throw new ArgumentOutOfRangeException(nameof(id));
 
             this.LastName = lastName.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(lastName));
 

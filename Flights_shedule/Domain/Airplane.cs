@@ -93,7 +93,7 @@ namespace Domain
 
             this.AirplaneClass = airplaneClass;
 
-            this.SeatsCount = seatsCount.NullOrNegative()?.SeatRange() ?? throw new ArgumentOutOfRangeException(nameof(seatsCount));
+            this.SeatsCount = seatsCount.IsPassedSeatRange() ? seatsCount : throw new ArgumentOutOfRangeException(nameof(seatsCount));
 
             this.FlightRange = flightRange.IsPassedFlightRangeCheck() ? flightRange : throw new ArgumentOutOfRangeException(nameof(flightRange));
 
