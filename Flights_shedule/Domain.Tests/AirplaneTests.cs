@@ -13,115 +13,156 @@ namespace Domain.Tests
         [Test]
         public void ValidData_ToString_Success()
         {
-            // arrange
             var airplane = GenerateAirplane();
 
-            // act
             var result = airplane.ToString();
 
-            // assert
-            Assert.AreEqual("Common, AA44,A, 286, 5000,25", result);
+            var expected = "Common, AA44,A, 286, 5000,25";
+
+            Assert.AreEqual(expected, result);
         }
 
         [Test]
-        public void Ctor_WrongData_EmptyType_Fail()
+        public void Ctor_EmptyType_ThrowsArgumentOutOfRangeException()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateAirplane(string.Empty));
         }
 
         [Test]
-        public void Ctor_WrongData_TailNumber_Fail()
+        public void Ctor_Empty_TailNumber_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateAirplane("Mil", 12.42, string.Empty));
+            Assert.Throws<ArgumentOutOfRangeException>(()
+                => _ = GenerateAirplane(
+                    type: "Mil",
+                    size: 12.42,
+                    tailNumber: string.Empty));
         }
 
         [Test]
 
-        public void Ctor_WrongData_TotalWeightIsNegative_Fail()
+        public void Ctor_TotalWeight_LessThenMinimum_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateAirplane("Mil", 359.24, "ABE231", -590));
+            Assert.Throws<ArgumentOutOfRangeException>(()
+                => _ = GenerateAirplane(
+                    type: "Mil",
+                    size: 359.24,
+                    tailNumber: "ABE231",
+                    totalWeight: -590));
         }
 
         [Test]
 
-        public void Ctor_WrongData_TotalWeightIsNull_Fail()
+        public void Ctor_TotalWeight_BiggerThenMaximum_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateAirplane("Mil", 359.24, "ABE231", 0));
+            Assert.Throws<ArgumentOutOfRangeException>(()
+                => _ = GenerateAirplane(
+                    type: "Mil",
+                    size: 359.24,
+                    tailNumber: "ABE231",
+                    totalWeight: 10000));
         }
 
         [Test]
 
-        public void Ctor_WrongData_TotalWeightNotInRange_Fail()
+        public void Ctor_FlightRange_LessThenMinimum_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateAirplane("Mil", 359.24, "ABE231", 100000));
+            Assert.Throws<ArgumentOutOfRangeException>(()
+                => _ = GenerateAirplane(
+                    type: "Mil",
+                    size: 359.24,
+                    tailNumber: "ABE231",
+                    totalWeight: 5000,
+                    airplaneClass: AirplaneClasses.B,
+                    seatsCount: 300,
+                    flightRange: -52155));
         }
 
         [Test]
 
-        public void Ctor_WrongData_FlightRangeIsNegative_Fail()
+        public void Ctor_FlightRange_BiggerThenMaximum_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateAirplane("Mil", 359.24, "ABE231", 100000, 0, 300, -52155));
+            Assert.Throws<ArgumentOutOfRangeException>(()
+                => _ = GenerateAirplane(
+                    type: "Mil",
+                    size: 359.24,
+                    tailNumber: "ABE231",
+                    totalWeight: 5000,
+                    airplaneClass: AirplaneClasses.C,
+                    seatsCount: 300,
+                    flightRange: 30000));
         }
 
         [Test]
 
-        public void Ctor_WrongData_FlightRangeIsNull_Fail()
+        public void Ctor_SeatsCount_LessThenMinimum_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateAirplane("Mil", 359.24, "ABE231", 100000, 0, 300, 0));
+            Assert.Throws<ArgumentOutOfRangeException>(()
+                => _ = GenerateAirplane(
+                    type: "Mil",
+                    size: 359.24,
+                    tailNumber: "ABE231",
+                    totalWeight: 5000,
+                    airplaneClass: AirplaneClasses.D,
+                    seatsCount: -300));
         }
 
         [Test]
 
-        public void Ctor_WrongData_FlightRangeNotInRange_Fail()
+        public void Ctor_SeatsCount_BiggerThenMaximum_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateAirplane("Mil", 359.24, "ABE231", 100000, 0, 300, 500));
+            Assert.Throws<ArgumentOutOfRangeException>(()
+                => _ = GenerateAirplane(
+                    type: "Mil",
+                    size: 359.24,
+                    tailNumber: "ABE231",
+                    totalWeight: 5000,
+                    airplaneClass: AirplaneClasses.A,
+                    seatsCount: 2000));
         }
 
         [Test]
 
-        public void Ctor_WrongData_SeatsCountIsNegative_Fail()
+        public void Ctor_Size_LessThenMinimum_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateAirplane("Mil", 359.24, "ABE231", 100000, 0, -300));
+            Assert.Throws<ArgumentOutOfRangeException>(()
+                => _ = GenerateAirplane(
+                    type: "Mil",
+                    size: -359.24,
+                    tailNumber: "ABE231",
+                    totalWeight: 5000));
         }
 
         [Test]
 
-        public void Ctor_WrongData_SeatsCountIsNull_Fail()
+        public void Ctor_Size_BiggerThenMaximum_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateAirplane("Mil", 359.24, "ABE231", 100000, 0, 0));
-        }
-
-        [Test]
-
-        public void Ctor_WrongData_SeatsCountNotInRange_Fail()
-        {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateAirplane("Mil", 359.24, "ABE231", 100000, 0, 50));
-        }
-
-        [Test]
-
-        public void Ctor_WrongData_SizeIsNegative_Fail()
-        {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateAirplane("Mil", -359.24, "ABE231", 0));
-        }
-
-        [Test]
-
-        public void Ctor_WrongData_SizeIsNull_Fail()
-        {
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateAirplane("Mil", 0, "ABE231", 0));
+            Assert.Throws<ArgumentOutOfRangeException>(()
+                => _ = GenerateAirplane(
+                    type: "Mil",
+                    size: 0,
+                    tailNumber: "ABE231",
+                    totalWeight: 10000));
         }
 
         [Test]
         public void Ctor_ValidData_EmptyPassenger_Success()
         {
-            // arrange & act & assert
-            Assert.DoesNotThrow(() => _ = GenerateAirplane("MIL", 550.50, "PRE3000"));
+            Assert.DoesNotThrow(()
+                => _ = GenerateAirplane(
+                    type: "MIL",
+                    size: 550.50,
+                    tailNumber: "PRE3000"));
         }
 
-        private static Airplane GenerateAirplane(string type = null, double size = 350.29, string tailNumber = null, double totalWeight = 5000.25, AirplaneClasses airplaneClass = AirplaneClasses.A, int seatsCount = 286, double flightRange = 10000.252)
-        {
-            return new (123, type ?? "Common", size, tailNumber ?? "AA44", totalWeight, airplaneClass, seatsCount, flightRange);
-        }
+        private static Airplane GenerateAirplane(
+            string type = null,
+            double size = 350.29,
+            string tailNumber = null,
+            double totalWeight = 5000.25,
+            AirplaneClasses airplaneClass = AirplaneClasses.A,
+            int seatsCount = 286,
+            double flightRange = 10000.252)
+            => new
+            (id: 123, type ?? "Common", size, tailNumber ?? "AA44", totalWeight, airplaneClass, seatsCount, flightRange);
     }
 }
