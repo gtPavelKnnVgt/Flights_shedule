@@ -43,9 +43,9 @@ namespace Domain.Tests
             Assert.DoesNotThrow(() => _ = GenerateFlight(900));
         }
 
-        private static Passenger GeneratePassenger(string secondName = null, string firstName = null) => new(1, secondName ?? "О'Брайен", firstName ?? "Уолтер");
+        private static Passenger GeneratePassenger(string secondName = null, string firstName = null) => new (1, secondName ?? "О'Брайен", firstName ?? "Уолтер");
 
-        private static Flight GenerateFlight(int flightNumber = 1, int ticketPrice = 1000, string departureTime = null, string arrivalTime = null)
+        private static Flight GenerateFlight(int flightNumber = 1, int ticketPrice = 2000, string departureTime = null, string arrivalTime = null)
         {
             return new (
                     flightNumber, ticketPrice,

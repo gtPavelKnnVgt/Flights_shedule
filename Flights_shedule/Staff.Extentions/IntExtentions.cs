@@ -7,7 +7,7 @@ namespace Staff.Extentions
         MinSeats = 100,
         MinIdentificationNumber = 0,
         MinTicketPrice = 2000,
-        MaxTicketPrice = 10000
+        MaxTicketPrice = 100000
 
     }
     public static class IntExtentions

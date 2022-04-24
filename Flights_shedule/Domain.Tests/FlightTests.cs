@@ -5,6 +5,7 @@
 namespace Domain.Tests
 {
     using System;
+    using System.Collections.Generic;
     using NUnit.Framework;
 
     [TestFixture]
@@ -12,68 +13,100 @@ namespace Domain.Tests
     public class FlightTests
     {
         [Test]
-        public void ValidData_ToString_Success()
+        public void ValidData_MultipulPassengers_ToString_Success()
         {
-            // arrange
-            var passenger = GeneratePassenger();
-            var testFlight = GenerateFlight(passenger);
+            var passengers = GeneratePassengers();
 
-            // act
+            var testFlight = GenerateFlight(passengers);
+
             var result = testFlight.ToString();
 
-            // assert
-            Assert.AreEqual("197 О'Брайен У.", result);
+            var expected = "197 KSEA A., AAA B., BBB C.";
+
+            Assert.AreEqual(expected, result);
         }
 
         [Test]
-        public void Ctor_WrongData_EmptyDepartureTime_Fail()
+        public void Ctor_EmptyDepartureTime_ThrowsArgumentOutOfRangeException()
         {
-            var passenger = GeneratePassenger();
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, 1, 1000, string.Empty, "15:00"));
+            var passengers = GeneratePassengers();
+            Assert.Throws<ArgumentOutOfRangeException>(()
+                => _ = GenerateFlight(
+                    passengers: passengers,
+                    flightNumber: 1,
+                    ticketPrice: 2000,
+                    departureTime: string.Empty,
+                    arrivalTime: "15:00"));
         }
 
         [Test]
-        public void Ctor_WrongData_EmptyArrivalTime_Fail()
+        public void Ctor_EmptyArrivalTime_ThrowsArgumentOutOfRangeException()
         {
-            var passenger = GeneratePassenger();
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, 1, 1000, "12:30", string.Empty));
+            var passengers = GeneratePassengers();
+            Assert.Throws<ArgumentOutOfRangeException>(()
+                => _ = GenerateFlight(
+                    passengers: passengers,
+                    flightNumber: 1,
+                    ticketPrice: 2000,
+                    departureTime: "12:30",
+                    arrivalTime: string.Empty));
         }
 
         [Test]
-        public void Ctor_WrongData_FlightNumberIsNegative_Fail()
+        public void Ctor_FlightNumber_LessThenMinimum_ThrowsArgumentOutOfRangeException()
         {
-            var passenger = GeneratePassenger();
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, -1, 1000, "12:30", "15:00"));
+            var passengers = GeneratePassengers();
+            Assert.Throws<ArgumentOutOfRangeException>(()
+                => _ = GenerateFlight(
+                    passengers: passengers,
+                    flightNumber: -1,
+                    ticketPrice: 2000,
+                    departureTime: "12:30",
+                    arrivalTime: "15:00"));
         }
 
         [Test]
-        public void Ctor_WrongData_FlightNumberIsNull_Fail()
+        public void Ctor_TicketPrice_LessThenMinimum_ThrowsArgumentOutOfRangeException()
         {
-            var passenger = GeneratePassenger();
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = new Flight(0, 1000, "12:30", "15:00"));
+            var passengers = GeneratePassengers();
+            Assert.Throws<ArgumentOutOfRangeException>(()
+                => _ = GenerateFlight(
+                    passengers: passengers,
+                    flightNumber: 1,
+                    ticketPrice: -1000,
+                    departureTime: "12:30",
+                    arrivalTime: "15:00"));
         }
 
         [Test]
-        public void Ctor_WrongData_TicketPriceisNegative_Fail()
+        public void Ctor_TicketPrice_BiggerThenMaximum_ThrowsArgumentOutOfRangeException()
         {
-            var passenger = GeneratePassenger();
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, 1, -1000, "12:30", "15:00"));
+            var passengers = GeneratePassengers();
+            Assert.Throws<ArgumentOutOfRangeException>(()
+                => _ = GenerateFlight(
+                    passengers: passengers,
+                    flightNumber: 23,
+                    ticketPrice: 200000,
+                    departureTime: "12:30",
+                    arrivalTime: "15:00"));
         }
 
-        [Test]
-        public void Ctor_WrongData_TicketPriceIsNull_Fail()
-        {
-            var passenger = GeneratePassenger();
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = GenerateFlight(passenger, 23, 0, "12:30", "15:00"));
-        }
+        private static Flight GenerateFlight(
+            HashSet<Passenger> passengers,
+            int flightNumber = 197,
+            int ticketPrice = 2000,
+            string departureTime = null,
+            string arrivalTime = null)
+            => new (flightNumber, ticketPrice, departureTime ?? "12:30", arrivalTime ?? "15:00", passengers);
 
-        private static Flight GenerateFlight(Passenger passenger, int flightNumber = 197, int ticketPrice = 1000, string departureTime = null, string arrivalTime = null)
+        private static HashSet<Passenger> GeneratePassengers()
         {
-            return new (flightNumber, ticketPrice,
-               departureTime ?? "12:30",
-               arrivalTime ?? "15:00", passenger);
+            return new HashSet<Passenger>
+            {
+                new Passenger (id: 1, lastName: "KSEA", firstName: "ASRQW"),
+                new Passenger (id: 2, lastName: "AAA", firstName: "BBBB"),
+                new Passenger (id: 3, lastName: "BBB", firstName: "CCC"),
+            };
         }
-
-        private static Passenger GeneratePassenger(string secondName = null, string firstName = null) => new(1, secondName ?? "О'Брайен", firstName ?? "Уолтер");
     }
 }
