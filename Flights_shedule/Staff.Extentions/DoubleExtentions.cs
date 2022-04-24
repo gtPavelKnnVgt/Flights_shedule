@@ -2,14 +2,23 @@
 
 namespace Staff.Extentions
 {
+    public enum AirplaneChecker
+    {
+        MaxWeight = 9000,
+        MinWeight = 50,
+        MaxFlightRange = 20000,
+        MinFlightRange = 1000,
+        MaxSize = 2000,
+        MinSize = 100
+    }
+
     public static class DoubleExtentions
     {
-        public static bool IsNegative(this double value) => double.IsNegative(value);
-        public static double? WeightCheck(this double value) => value > 90000 || value < 5000 ? null : (double?) value;
-        public static double? FlightRangeCheck(this double value) => value < 1000 || value > 20000 ? null : (double?)value; 
-        public static double? NullOrNegative(this double value)
-        {
-            return value.IsNegative() || (double?)value is null ? null : (double?)value;
-        }
+        public static bool IsPassedWeightCheck(this double value)
+            => value >= (double)AirplaneChecker.MinWeight && value <= (double)AirplaneChecker.MaxWeight;
+        public static bool IsPassedFlightRangeCheck(this double value)
+            => value >= (double)AirplaneChecker.MinFlightRange && value <= (double)AirplaneChecker.MaxFlightRange;
+        public static bool IsPassedSizeCheck(this double value)
+            => value >= (double)AirplaneChecker.MinSize && value <= (double)AirplaneChecker.MaxSize;
     }
 }

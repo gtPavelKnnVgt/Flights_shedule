@@ -85,17 +85,17 @@ namespace Domain
 
             this.Type = type.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(type));
 
-            this.Size = size.NullOrNegative() ?? throw new ArgumentOutOfRangeException(nameof(size));
+            this.Size = size.IsPassedSizeCheck() ? size : throw new ArgumentOutOfRangeException(nameof(size));
 
             this.TailNumber = tailNumber.TrimOrNull() ?? throw new ArgumentOutOfRangeException(nameof(tailNumber));
 
-            this.TotalWeight = totalWeight.NullOrNegative()?.WeightCheck() ?? throw new ArgumentOutOfRangeException(nameof(totalWeight));
+            this.TotalWeight = totalWeight.IsPassedWeightCheck() ? totalWeight : throw new ArgumentOutOfRangeException(nameof(totalWeight));
 
             this.AirplaneClass = airplaneClass;
 
             this.SeatsCount = seatsCount.NullOrNegative()?.SeatRange() ?? throw new ArgumentOutOfRangeException(nameof(seatsCount));
 
-            this.FlightRange = flightRange.NullOrNegative()?.FlightRangeCheck() ?? throw new ArgumentOutOfRangeException(nameof(flightRange));
+            this.FlightRange = flightRange.IsPassedFlightRangeCheck() ? flightRange : throw new ArgumentOutOfRangeException(nameof(flightRange));
 
             if (flights != null)
             {
