@@ -4,6 +4,7 @@
 
 namespace Repository.Tests
 {
+    using System;
     using System.Linq;
     using Domain;
     using NHibernate;
@@ -18,35 +19,86 @@ namespace Repository.Tests
         public void Add_Passenger()
         {
             var savedPassenger = GeneratePassenger();
-            _iRep.Create(savedPassenger);
-            Assert.AreEqual(1, _iRep.GetAll().Count());
-            Assert.AreEqual("Уолтер", savedPassenger.FirstName);
+
+            _iRepository.Create(savedPassenger);
+
+            var actual = _iRepository.GetAll().Count();
+
+            var expected = 1;
+
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void Delete_PassengerById()
+        public void Delete_Passenger_By_Id()
         {
-            var deletePassenger = _iRep.Get(1);
-            _iRep.Delete(1);
-            Assert.AreEqual(0, _iRep.GetAll().Count());
+            _iRepository.Delete(1);
+
+            var actual = _iRepository.GetAll().Count();
+
+            var expected = 0;
+
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void UpdatePassengerByLastName()
+        public void Update_Passenger_By_LastName()
         {
-            var savedPassenger = GeneratePassenger(2);
-            _iRep.Create(savedPassenger);
-            var updatePassenger = _iRep.Get(2);
+            var savedPassenger = GeneratePassenger();
+
+            _iRepository.Create(savedPassenger);
+
+            var updatePassenger = _iRepository.Get(2);
+
             updatePassenger.LastName = "Чернов";
 
-            _iRep.Update(updatePassenger);
-            Assert.AreEqual("Чернов", updatePassenger.LastName);
+            _iRepository.Update(updatePassenger);
+
+            var actual = updatePassenger.LastName;
+
+            var expected = "Чернов";
+
+            Assert.AreEqual(expected, actual);
         }
 
-        private static Passenger GeneratePassenger(int id = 1, string secondName = null, string firstName = null) => new(1, secondName ?? "О'Брайен", firstName ?? "Уолтер");
+        [Test]
+        public void Get_Passenger_When_No_Entity_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => _ = _iRepository.Get(12412));
+        }
+
+        [Test]
+        public void Delete_Passenger_When_No_Entity_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => _iRepository.Delete(12412));
+        }
+
+        [Test]
+        public void Find_Passenger_By_LastName()
+        {
+            var savedPerson = GeneratePassenger();
+
+            _iRepository.Create(savedPerson);
+
+            var passengerToBeFind = _iRepository.Find((pas) => pas.LastName == "О'Брайен");
+
+            var actual = passengerToBeFind;
+
+            var expected = savedPerson;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Find_Passenger_By_Uknown_LastName_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => _iRepository.Find((pas) => pas.LastName == "Something New"));
+        }
+
+        private static Passenger GeneratePassenger(string secondName = null, string firstName = null) => new (1, secondName ?? "О'Брайен", firstName ?? "Уолтер");
 
         private static readonly ISession _session = NHibernateTestsConfigurator.BuildSessionForTest();
 
-        private static readonly IRepository<Passenger> _iRep = new PassengerRepository(_session);
+        private static readonly IRepository<Passenger> _iRepository = new PassengerRepository(_session);
     }
 }
