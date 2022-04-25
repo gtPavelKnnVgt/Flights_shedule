@@ -4,6 +4,7 @@
 
 namespace Repository.Tests
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Domain;
@@ -16,61 +17,108 @@ namespace Repository.Tests
     public class AirplaneRepositoryTests
     {
         [Test]
-        public void Add_AirplaneWithNoFlights()
+        public void Add_Airplane_With_Flights()
         {
             var savedAir = GenerateAirplane();
-            _iRep.Create(savedAir);
-            Assert.AreEqual(2, _iRep.GetAll().Count());
-            Assert.AreEqual("AA44", savedAir.TailNumber);
-        }
 
-        [Test]
-        public void Add_AirplaneWithFlights()
-        {
-            var savedAir = GenerateAirplane();
             savedAir.Flights = new HashSet<Flight>()
             {
                 new (1, 2000, "10:00", "18:00"),
+                new (2, 2000, "11:00", "19:00"),
             };
-            _iRep.Create(savedAir);
-            Assert.AreEqual(1, _iRep.GetAll().Count());
-            Assert.AreEqual("AA44", savedAir.TailNumber);
+
+            _iRepository.Create(savedAir);
+
+            var actual = _iRepository.GetAll().Count();
+
+            var expected = 1;
+
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void Delete_AirplaneById()
+        public void Add_Airplane_With_NoFlights()
         {
-            var airplane = _iRep.Get(1);
-            _iRep.Delete(1);
-            Assert.AreEqual(1, _iRep.GetAll().Count());
+            var savedAir = GenerateAirplane();
+
+            _iRepository.Create(savedAir);
+
+            var actual = _iRepository.GetAll().Count();
+
+            var expected = 2;
+
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void UpdateAirplaneByTailNumber()
+        public void Delete_Airplane_By_Id()
         {
-            var savedAir = GenerateAirplane(2);
-            _iRep.Create(savedAir);
-            var updateAir = _iRep.Get(2);
-            updateAir.TailNumber = "AH21";
+            _iRepository.Delete(1);
 
-            _iRep.Update(updateAir);
-            Assert.AreEqual("AH21", updateAir.TailNumber);
+            var actual = _iRepository.GetAll().Count();
+
+            var expected = 1;
+
+            Assert.AreEqual(expected, actual);
         }
 
-        private static Airplane GenerateAirplane(int id = 1, string type = null, double size = 350.29, string tailNumber = null, double totalWeight = 5000.25, AirplaneClasses airplaneClass = AirplaneClasses.A, int seatsCount = 286, double flightRange = 10000.252)
+        [Test]
+        public void Update_Airplane_By_TailNumber()
         {
-            return new (1, type ?? "Common", size, tailNumber ?? "AA44", totalWeight, airplaneClass, seatsCount, flightRange);
+            var updatedAir = _iRepository.Get(2);
+
+            updatedAir.TailNumber = "AH21";
+
+            _iRepository.Update(updatedAir);
+
+            var actual = updatedAir.TailNumber;
+
+            var expected = "AH21";
+            Assert.AreEqual(expected, actual);
         }
 
-        private static Flight GenerateFlight(Passenger passenger, int flightNumber = 1, int ticketPrice = 1000, string departureTime = null, string arrivalTime = null)
+        [Test]
+        public void Get_Airplane_When_No_Entity_ThrowsArgumentNullException()
         {
-            return new (flightNumber, ticketPrice,
-               departureTime ?? "12:30",
-               arrivalTime ?? "15:00", passenger);
+            Assert.Throws<ArgumentNullException>(() => _ = _iRepository.Get(12412));
         }
+
+        [Test]
+        public void Delete_Airplane_When_No_Entity_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => _iRepository.Delete(12412));
+        }
+
+        [Test]
+        public void Find_Airplane_By_TailNumber()
+        {
+            var airplaneToBeFind = _iRepository.Find((air) => air.TailNumber == "AA44");
+
+            var actual = airplaneToBeFind;
+
+            var expected = _iRepository.Get(2);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Find_Airplane_By_Uknown_TailNumber_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => _iRepository.Find((air) => air.TailNumber == "UUUUUU"));
+        }
+
+        private static Airplane GenerateAirplane(
+            string type = null,
+            double size = 350.29,
+            string tailNumber = null,
+            double totalWeight = 5000.25,
+            AirplaneClasses airplaneClass = AirplaneClasses.A,
+            int seatsCount = 286,
+            double flightRange = 10000.252)
+            => new (1, type ?? "Common", size, tailNumber ?? "AA44", totalWeight, airplaneClass, seatsCount, flightRange);
 
         private static readonly ISession _session = NHibernateTestsConfigurator.BuildSessionForTest();
 
-        private static readonly IRepository<Airplane> _iRep = new AirplaneRepository(_session);
+        private static readonly IRepository<Airplane> _iRepository = new AirplaneRepository(_session);
     }
 }

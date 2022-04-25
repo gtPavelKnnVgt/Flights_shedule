@@ -15,48 +15,56 @@ namespace Repository.Tests
     public class DirectionRepositoryTests
     {
         [Test]
-        public void Add_DirectionWithNoFlights()
+        public void Add_Direction_With_No_Flights()
         {
             var savedDirection = GenerateDirection();
-            _iRep.Create(savedDirection);
-            Assert.AreEqual(1, _iRep.GetAll().Count());
-            Assert.AreEqual("Москва", savedDirection.StartLocation);
+
+            _iRepository.Create(savedDirection);
+
+            var actual = _iRepository.GetAll().Count();
+
+            var expected = 1;
+
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void Delete_DirectionById()
+        public void Delete_Direction_By_Id()
         {
-            var deleteDirection = _iRep.Get(1);
-            _iRep.Delete(1);
-            Assert.AreEqual(0, _iRep.GetAll().Count());
+            _iRepository.Delete(1);
+
+            var actual = _iRepository.GetAll().Count();
+
+            var expected = 0;
+
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
-        public void UpdateDirectionByStartLocation()
+        public void Update_Direction_By_StartLocation()
         {
-            var savedDirection = GenerateDirection(2);
-            _iRep.Create(savedDirection);
-            var updateDirection = _iRep.Get(2);
+            var savedDirection = GenerateDirection();
+
+            _iRepository.Create(savedDirection);
+
+            var updateDirection = _iRepository.Get(2);
+
             updateDirection.StartLocation = "Самара";
 
-            _iRep.Update(updateDirection);
-            Assert.AreEqual("Самара", updateDirection.StartLocation);
+            _iRepository.Update(updateDirection);
+
+            var actual = updateDirection.StartLocation;
+
+            var expected = "Самара";
+
+            Assert.AreEqual(expected, actual);
         }
 
-        private static Direction GenerateDirection(int id = 1, string startLocation = null, string endLocation = null)
-        {
-            return new (1, startLocation ?? "Москва", endLocation ?? "Рязань");
-        }
-
-        private static Flight GenerateFlight(int flightNumber = 1, int ticketPrice = 1000, string departureTime = null, string arrivalTime = null)
-        {
-            return new (flightNumber, ticketPrice,
-               departureTime ?? "12:30",
-               arrivalTime ?? "15:00");
-        }
+        private static Direction GenerateDirection(string startLocation = null, string endLocation = null)
+            => new (1, startLocation ?? "Москва", endLocation ?? "Рязань");
 
         private static readonly ISession _session = NHibernateTestsConfigurator.BuildSessionForTest();
 
-        private static readonly IRepository<Direction> _iRep = new DirectionRepository(_session);
+        private static readonly IRepository<Direction> _iRepository = new DirectionRepository(_session);
     }
 }
