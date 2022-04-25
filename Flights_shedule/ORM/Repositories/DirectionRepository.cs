@@ -36,13 +36,15 @@ namespace ORM.Repositories
         /// <inheritdoc/>
         public Direction Find(Expression<Func<Direction, bool>> predicate)
         {
-            return this.GetAll().FirstOrDefault(predicate);
+            return this.GetAll().FirstOrDefault(predicate)
+                ?? throw new ArgumentNullException(nameof(predicate));
         }
 
         /// <inheritdoc/>
         public Direction Get(int id)
         {
-            return this._session.Get<Direction>(id);
+            return this.GetAll().SingleOrDefault(a => a.Id == id)
+                ?? throw new ArgumentNullException(nameof(id));
         }
 
         /// <inheritdoc/>
@@ -71,7 +73,7 @@ namespace ORM.Repositories
         {
             if (!this.TryGet(id, out var direction))
             {
-                return;
+                throw new ArgumentNullException(nameof(id));
             }
 
             this._session.Delete(direction);

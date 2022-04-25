@@ -4,6 +4,7 @@
 
 namespace Repository.Tests
 {
+    using System;
     using System.Linq;
     using Domain;
     using NHibernate;
@@ -58,6 +59,40 @@ namespace Repository.Tests
             var expected = "Самара";
 
             Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Get_Direction_When_No_Entity_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => _ = _iRepository.Get(412));
+        }
+
+        [Test]
+        public void Delete_Direction_When_No_Entity_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => _iRepository.Delete(12312));
+        }
+
+        [Test]
+        public void Find_Direction_By_StartLocation()
+        {
+            var savedDirection = GenerateDirection();
+
+            _iRepository.Create(savedDirection);
+
+            var directionToBeFind = _iRepository.Find((dir) => dir.StartLocation == "Москва");
+
+            var actual = directionToBeFind;
+
+            var expected = _iRepository.Get(2);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Find_Direction_By_Uknown_StartLocation_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => _iRepository.Find((dir) => dir.StartLocation == "ASDSAD"));
         }
 
         private static Direction GenerateDirection(string startLocation = null, string endLocation = null)
