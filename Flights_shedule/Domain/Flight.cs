@@ -23,7 +23,12 @@ namespace Domain
         /// <param name="departureTime">Время отправления.</param>
         /// <param name="arrivalTime">Время прибытия.</param>
         /// <param name="passengers">Пассажиры рейса.</param>
-        public Flight(int flightNumber, int ticketPrice, string departureTime, string arrivalTime, params Passenger[] passengers)
+        public Flight(
+            int flightNumber,
+            int ticketPrice,
+            string departureTime,
+            string arrivalTime,
+            params Passenger[] passengers)
             : this(flightNumber, ticketPrice, departureTime, arrivalTime, new HashSet<Passenger>(passengers))
         {
         }
@@ -38,7 +43,12 @@ namespace Domain
         /// <param name="departureTime">Время отправления.</param>
         /// <param name="arrivalTime">Время прибытия.</param>
         /// <param name="passengers">Пассажиры рейса.</param>
-        public Flight(int flightNumber, int ticketPrice, string departureTime, string arrivalTime, ISet<Passenger> passengers = null)
+        public Flight(
+            int flightNumber,
+            int ticketPrice,
+            string departureTime,
+            string arrivalTime,
+            ISet<Passenger> passengers = null)
         {
             this.FlightNumber = flightNumber.IsPassedIdentificationCheck() ? flightNumber : throw new ArgumentOutOfRangeException(nameof(flightNumber));
 

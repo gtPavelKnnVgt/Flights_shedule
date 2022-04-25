@@ -20,7 +20,11 @@ namespace Domain
         /// <param name="startLocation">Город вылета.</param>
         /// <param name="endLocation">Город прилёта.</param>
         /// <param name="flights">Рейсы имеющие данное направление.</param>
-        public Direction(int id, string startLocation, string endLocation, params Flight[] flights)
+        public Direction(
+            int id,
+            string startLocation,
+            string endLocation,
+            params Flight[] flights)
             : this(id, startLocation, endLocation, new HashSet<Flight>(flights))
         {
         }
@@ -32,7 +36,11 @@ namespace Domain
         /// <param name="startLocation">Город вылета.</param>
         /// <param name="endLocation">Город прилёта.</param>
         /// <param name="flights">Рейсы имеющие данное направление.</param>
-        public Direction(int id, string startLocation, string endLocation, ISet<Flight> flights = null)
+        public Direction(
+            int id,
+            string startLocation,
+            string endLocation,
+            ISet<Flight> flights = null)
         {
             this.Id = id;
 

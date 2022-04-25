@@ -62,7 +62,16 @@ namespace Domain
         /// <param name="seatsCount">Количество мест.</param>
         /// <param name="flightRange">Дальность полёта.</param>
         /// <param name="flights">Рейсы, на которых летает данный самолёт.</param>
-        public Airplane(int id, string type, double size, string tailNumber, double totalWeight, AirplaneClasses airplaneClass, int seatsCount, double flightRange, params Flight[] flights)
+        public Airplane(
+            int id,
+            string type,
+            double size,
+            string tailNumber,
+            double totalWeight,
+            AirplaneClasses airplaneClass,
+            int seatsCount,
+            double flightRange,
+            params Flight[] flights)
             : this(id, type, size, tailNumber, totalWeight, airplaneClass, seatsCount, flightRange, new HashSet<Flight>(flights))
         {
         }
@@ -79,7 +88,16 @@ namespace Domain
         /// <param name="seatsCount">Количество мест.</param>
         /// <param name="flightRange">Дальность полёта.</param>
         /// <param name="flights">Рейсы, на которых летает данный самолёт.</param>
-        public Airplane(int id, string type, double size, string tailNumber, double totalWeight, AirplaneClasses airplaneClass, int seatsCount, double flightRange, ISet<Flight> flights = null)
+        public Airplane(
+            int id,
+            string type,
+            double size,
+            string tailNumber,
+            double totalWeight,
+            AirplaneClasses airplaneClass,
+            int seatsCount,
+            double flightRange,
+            ISet<Flight> flights = null)
         {
             this.Id = id;
 
