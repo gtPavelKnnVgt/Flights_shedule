@@ -36,13 +36,15 @@ namespace ORM.Repositories
         /// <inheritdoc/>
         public Flight Find(Expression<Func<Flight, bool>> predicate)
         {
-            return this.GetAll().FirstOrDefault(predicate);
+            return this.GetAll().FirstOrDefault(predicate)
+                ?? throw new ArgumentNullException(nameof(predicate));
         }
 
         /// <inheritdoc/>
         public Flight Get(int id)
         {
-            return this._session.Get<Flight>(id);
+            return this._session.Get<Flight>(id)
+                ?? throw new ArgumentNullException(nameof(id));
         }
 
         /// <inheritdoc/>
@@ -71,7 +73,7 @@ namespace ORM.Repositories
         {
             if (!this.TryGet(id, out var flight))
             {
-                return;
+                throw new ArgumentNullException(nameof(id));
             }
 
             this._session.Delete(flight);
