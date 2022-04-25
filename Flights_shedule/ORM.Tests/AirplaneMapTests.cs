@@ -18,11 +18,25 @@ namespace ORM.Tests
         public void PersistenceSpecification_ValidData_Success()
         {
             // arrange
-            var passenger = new Passenger(1, "Дюсов", "Михаил");
+            var passenger = new Passenger(id: 1, lastName: "Дюсов", firstName: "Михаил");
 
-            var flight = new Flight(1, 1000, "12:30", "15:00", passenger);
-            var direction = new Direction(1, "Москва", "Минск", flight);
-            var airplane = new Airplane(888, "Military", 350.29, "AA44", 5000.532, AirplaneClasses.A, 286, 10000.252, flight);
+            var flight = new Flight(
+                flightNumber: 1,
+                ticketPrice: 2000,
+                departureTime: "12:30",
+                arrivalTime: "15:00",
+                passengers: passenger);
+
+            var airplane = new Airplane(
+                id: 888,
+                type: "Military",
+                size: 350.29,
+                tailNumber: "AA44",
+                totalWeight: 5000.532,
+                airplaneClass: AirplaneClasses.A,
+                seatsCount: 286,
+                flightRange: 10000.252,
+                flights: flight);
 
             // act & assert
             new PersistenceSpecification<Airplane>(this.Session)

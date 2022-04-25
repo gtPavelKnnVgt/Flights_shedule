@@ -18,7 +18,7 @@ namespace ORM.Tests
         public void PersistenceSpecification_ValidSimpleData_Success()
         {
             // arrange
-            var direction = new Direction(1, "Москва", "Минск");
+            var direction = new Direction(id: 1, startLocation: "Москва", endLocation: "Минск");
 
             // act & assert
             new PersistenceSpecification<Direction>(this.Session)
@@ -29,10 +29,8 @@ namespace ORM.Tests
         public void PersistenceSpecification_ValidComplexData_Success()
         {
             // arrange
-            var passenger = new Passenger(1, "Дюсов", "Михаил");
-            var direction = new Direction(1, "Москва", "Минск");
-
-            var flight = new Flight(1, 1000, "12:30", "15:00", passenger);
+            var passenger = new Passenger(id: 1, lastName: "Дюсов", firstName: "Михаил");
+            var direction = new Direction(id: 1, startLocation: "Москва", endLocation: "Минск");
 
             // act & assert
             new PersistenceSpecification<Direction>(this.Session)
